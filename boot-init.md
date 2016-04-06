@@ -23,7 +23,24 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 * int 0x10获取显卡参数 --> 0x90004~0x9000d
 * 获取(copy)两个硬盘的参数表 -->0x90080~0x9009ff
 * 将system模块（0x10000~0x8ffff）移至内存0x0000处
-* 加载GDTR和IDTR
+* 准备GDT，加载GDTR。(这里的GDT只是为了进入保护模式的临时GDT)
+
+       gdt:
+      .word	0,0,0,0		# dummy
+
+      .word	0x07FF		# 8Mb - limit=2047 (2048*4096=8Mb)
+      .word	0x0000		# base address=0
+      .word	0x9A00		# code read/exec
+      .word	0x00C0		# granularity=4096, 386
+
+      .word	0x07FF		# 8Mb - limit=2047 (2048*4096=8Mb)
+      .word	0x0000		# base address=0
+      .word	0x9200		# data read/write
+      .word	0x00C0		# granularity=4096, 386
+* 准备IDT(也是临时的)并加载IDTR
+    idt_48:
+        .word	0			# idt limit=0
+        .word	0,0			# idt base=0L
 * 打开A20地址线
 * 初始化8259A
 * 将CR0寄存器的PE位置1，开启保护模式
