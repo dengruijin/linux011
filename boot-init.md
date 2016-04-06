@@ -46,10 +46,19 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
   *硬件中断号设置成0x20开始， 初始状态屏蔽8259A的所有中断请求*
 * 将CR0寄存器的PE位置1，开启保护模式
 * 跳转至system模块(0x00000)
+
+-----
 ## *head.s阶段
 此时CPU已经刚刚进入保护模式。head.s属于system模块的一部分，所以位于内存地址0x0处。
 * 初始化除cs外的各段寄存器为0x10.(cs是跳转时CPU自己设置的)
-* 
+* 初始化堆栈指针：  
+      lss _stack_start,%esp
+      
+      long user_stack[PAGE_SIZE >> 2];	// 定义系统堆栈指针，4K。指针指在最后一项。
+      struct{  // 该结构用于设置堆栈ss:esp（数据段选择符，指针）
+        long *a;
+        short b;
+      }stack_start ={&user_stack[PAGE_SIZE >> 2], 0x10};
 
 
 
