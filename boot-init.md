@@ -66,8 +66,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 |---------------|----------------|
 |**ignore_int高16位**|property:**0x8e00**|
 |selector:**0x0008** |**ignore_int低16位**|
-
-* 设置gdt  
+* 设置gdt,与setup中的gdt区别只是段限长变为16MB  
       gdt:	
       .quad 0x0000000000000000	/* NULL descriptor */
       .quad 0x00c09a0000000fff	/* 16Mb */
