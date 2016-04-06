@@ -89,7 +89,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         jmp L6 # main should never return here, but
         
 * 设置分页
-* 
+* 一个页目录和四个页表（共20KB）放在0x0000~0x4fff处
       
 
 
