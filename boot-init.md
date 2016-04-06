@@ -102,6 +102,20 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 #### mem_init内存管理初始化
 用字节数组mem_map来记录1MB以上物理内存页的状态,其中的值表示该页被占用的次数，0表示该页空闲，当申请一页物理内存时该字节值增加1.
 初始化时将mem_map[]所有项设为100(表示已占用)，然后将主内存区的mem_map[]设为0（空闲）。
+
+    void mem_init(long start_mem, long end_mem)
+    {
+        int i;
+
+        HIGH_MEMORY = end_mem;
+        for (i=0 ; i<PAGING_PAGES ; i++)
+            mem_map[i] = USED;
+        i = MAP_NR(start_mem);
+        end_mem -= start_mem;
+        end_mem >>= 12;
+        while (end_mem-->0)
+            mem_map[i++]=0;
+    }
 #### trap_init 中断初始化
 设置IDT，注册各种异常处理程序：  
 
