@@ -95,7 +95,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 
 ## *main.c阶段
 
-* 划分内存空间
+#### 划分内存空间:
       static long memory_end = 0;	// 机器具有的内存（字节数）。
       static long buffer_memory_end = 0;	// 高速缓冲区末端地址。
       static long main_memory_start = 0;	// 主内存（将用于分页）开始的位置。
