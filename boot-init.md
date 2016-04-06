@@ -52,7 +52,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 此时CPU已经刚刚进入保护模式。head.s属于system模块的一部分，所以位于内存地址0x0处。
 * 初始化除cs外的各段寄存器为0x10.(cs是跳转时CPU自己设置的)
 * 初始化堆栈指针：  
-      lss _stack_start,%esp
+      lss _stack_start,%esp //_stack_start在sched.c中定义
       
       long user_stack[PAGE_SIZE >> 2];	// 定义系统堆栈指针，4K。指针指在最后一项。
       struct{  // 该结构用于设置堆栈ss:esp（数据段选择符，指针）
