@@ -74,7 +74,19 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
       .quad 0x0000000000000000	/* TEMPORARY - don't use */
       .fill 252,8,0			/* space for LDT's and TSS's etc */
 
-* 重新加载段寄存器（因为gdt变了）
+* 重新加载段寄存器ds,es,fs,gs,ss（因为gdt变了）
+* 检测A20地址线是否开启成功
+* 检查数学协处理器
+* 制造进入main函数的现场：  
+       after_page_tables:
+        pushl $0 # These are the parameters to main :-)
+        pushl $0 # 这些是调用main 程序的参数（指init/main.c）。
+        pushl $0
+        pushl $L6 # return address for main, if it decides to.
+        pushl $_main # main函数入口。
+        jmp setup_paging # 跳转至第198 行。
+       L6:
+        jmp L6 # main should never return here, but
       
 
 
