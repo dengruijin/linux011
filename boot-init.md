@@ -51,7 +51,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 ## *head.s阶段
 此时CPU已经刚刚进入保护模式。head.s属于system模块的一部分，所以位于内存地址0x0处。
 * 初始化除cs外的各段寄存器为0x10.(cs是跳转时CPU自己设置的)
-* 初始化堆栈指针：  
+* __初始化堆栈指针__：  
       lss _stack_start,%esp //_stack_start在sched.c中定义
       
       long user_stack[PAGE_SIZE >> 2];	// 定义堆栈指针，4K。指针指在最后一项。
@@ -59,20 +59,22 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         long *a; //esp值设为user_stack数组末尾地址
         short b; //ss值设为0x10
       }stack_start ={&user_stack[PAGE_SIZE >> 2], 0x10};
-* 设置idt,将256个描述符都设成一样的:类型为中断们,DPL=0,选择符0x0008,  
+* __设置idt__,将256个描述符都设成一样的:类型为中断们,DPL=0,选择符0x0008,  
 处理函数为ignore_int,描述符内容如下：
 
 |31~16          |            15~0|
 |---------------|----------------|
 |**ignore_int高16位**|property:**0x8e00**|
 |selector:**0x0008** |**ignore_int低16位**|
-* 设置gdt,与setup中的gdt区别只是段限长变为16MB  
+* __设置gdt__,与setup中的gdt区别只是段限长变为16MB  
       gdt:	
       .quad 0x0000000000000000	/* NULL descriptor */
       .quad 0x00c09a0000000fff	/* 16Mb */
       .quad 0x00c0920000000fff	/* 16Mb */
       .quad 0x0000000000000000	/* TEMPORARY - don't use */
       .fill 252,8,0			/* space for LDT's and TSS's etc */
+
+* 重新加载段寄存器（因为gdt变了）
       
 
 
