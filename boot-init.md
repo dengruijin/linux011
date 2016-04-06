@@ -103,7 +103,36 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 用字节数组mem_map来记录1MB以上物理内存页的状态,其中的值表示该页被占用的次数，0表示该页空闲，当申请一页物理内存时该字节值增加1.
 初始化时将mem_map[]所有项设为100(表示已占用)，然后将主内存区的mem_map[]设为0（空闲）。
 #### trap_init 中断初始化
-设置IDT，注册各种异常处理程序
+设置IDT，注册各种异常处理程序：  
+
+    void trap_init(void)
+    {
+        int i;
+
+        set_trap_gate(0,&divide_error);
+        set_trap_gate(1,&debug);
+        set_trap_gate(2,&nmi);
+        set_system_gate(3,&int3);	/* int3-5 can be called from all */
+        set_system_gate(4,&overflow);
+        set_system_gate(5,&bounds);
+        set_trap_gate(6,&invalid_op);
+        set_trap_gate(7,&device_not_available);
+        set_trap_gate(8,&double_fault);
+        set_trap_gate(9,&coprocessor_segment_overrun);
+        set_trap_gate(10,&invalid_TSS);
+        set_trap_gate(11,&segment_not_present);
+        set_trap_gate(12,&stack_segment);
+        set_trap_gate(13,&general_protection);
+        set_trap_gate(14,&page_fault);
+        set_trap_gate(15,&reserved);
+        set_trap_gate(16,&coprocessor_error);
+        for (i=17;i<48;i++)
+            set_trap_gate(i,&reserved);
+        set_trap_gate(45,&irq13);
+        outb_p(inb_p(0x21)&0xfb,0x21);
+        outb(inb_p(0xA1)&0xdf,0xA1);
+        set_trap_gate(39,&parallel_interrupt);
+    }
 #### blk_dev_init
 #### chr_dev_init
 #### tty_init
