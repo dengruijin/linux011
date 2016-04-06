@@ -100,15 +100,15 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
       static long buffer_memory_end = 0;	// 高速缓冲区末端地址。
       static long main_memory_start = 0;	// 主内存（将用于分页）开始的位置。
 #### mem_init内存管理初始化
-* trap_init 中断初始化
-* blk_dev_init
-* chr_dev_init
-* tty_init
-* time_init
-* sched_init
-* buffer_init
-* hd_init
-* floppy_init
+#### trap_init 中断初始化
+#### blk_dev_init
+#### chr_dev_init
+#### tty_init
+#### time_init
+#### sched_init
+#### buffer_init
+#### hd_init
+#### floppy_init
 * sti
 * move_to_user_mode
 * fork
