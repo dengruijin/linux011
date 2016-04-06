@@ -100,7 +100,10 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
       static long buffer_memory_end = 0;	// 高速缓冲区末端地址。
       static long main_memory_start = 0;	// 主内存（将用于分页）开始的位置。
 #### mem_init内存管理初始化
+用字节数组mem_map来记录1MB以上物理内存页的状态,其中的值表示该页被占用的次数，0表示该页空闲，当申请一页物理内存时该字节值增加1.
+初始化时将mem_map[]所有项设为100(表示已占用)，然后将主内存区的mem_map[]设为0（空闲）。
 #### trap_init 中断初始化
+
 #### blk_dev_init
 #### chr_dev_init
 #### tty_init
