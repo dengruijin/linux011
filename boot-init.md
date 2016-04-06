@@ -54,11 +54,12 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 * 初始化堆栈指针：  
       lss _stack_start,%esp //_stack_start在sched.c中定义
       
-      long user_stack[PAGE_SIZE >> 2];	// 定义系统堆栈指针，4K。指针指在最后一项。
+      long user_stack[PAGE_SIZE >> 2];	// 定义堆栈指针，4K。指针指在最后一项。
       struct{  // 该结构用于设置堆栈ss:esp（数据段选择符，指针）
-        long *a;
-        short b;
+        long *a; //esp值设为user_stack数组末尾地址
+        short b; //ss值设为0x10
       }stack_start ={&user_stack[PAGE_SIZE >> 2], 0x10};
+      
 
 
 
