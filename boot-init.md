@@ -67,7 +67,13 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 |**ignore_int高16位**|property:**0x8e00**|
 |selector:**0x0008** |**ignore_int低16位**|
 
-* 设置gdt
+* 设置gdt  
+      gdt:	
+      .quad 0x0000000000000000	/* NULL descriptor */
+      .quad 0x00c09a0000000fff	/* 16Mb */
+      .quad 0x00c0920000000fff	/* 16Mb */
+      .quad 0x0000000000000000	/* TEMPORARY - don't use */
+      .fill 252,8,0			/* space for LDT's and TSS's etc */
       
 
 
