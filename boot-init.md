@@ -59,7 +59,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         long *a; //esp值设为user_stack数组末尾地址
         short b; //ss值设为0x10
       }stack_start ={&user_stack[PAGE_SIZE >> 2], 0x10};
-* 设置idt
+* 设置idt,将256个描述符都设成一样的:类型为中断们,DPL=0,选择符0x0008,处理函数为ignore_int
 * 设置gdt
       
 
