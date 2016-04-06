@@ -1,5 +1,5 @@
 # 内存管理
-用字节数组mem_map来记录主内存中内存页的状态
+用字节数组mem_map来记录主内存中物理内存页的状态
 
     // memory.c
     #define PAGING_MEMORY (15*1024*1024)
