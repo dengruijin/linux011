@@ -87,6 +87,9 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         jmp setup_paging # 跳转至第198 行。
        L6:
         jmp L6 # main should never return here, but
+        
+* 设置分页
+* 
       
 
 
