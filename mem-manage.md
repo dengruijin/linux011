@@ -3,7 +3,7 @@
 
     // memory.c
     #define PAGING_MEMORY (15*1024*1024)
-    #define PAGING_PAGES (PAGING_MEMORY>>12)
+    #define PAGING_PAGES (PAGING_MEMORY>>12) //3840个物理页
     #define USED 100
     static long HIGH_MEMORY = 0;
     static unsigned char mem_map [ PAGING_PAGES ] = {0,};
