@@ -152,6 +152,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 #### tty_init
 #### time_init
 #### sched_init
+  
  * 在GDT中设置task0的tss和ldt描述符项
         set_tss_desc(gdt+FIRST_TSS_ENTRY,&(init_task.task.tss));
         set_ldt_desc(gdt+FIRST_LDT_ENTRY,&(init_task.task.ldt));
@@ -172,7 +173,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         outb_p(LATCH & 0xff , 0x40);	/* LSB */
         outb(LATCH >> 8 , 0x40);	/* MSB */
  * 设置时钟中断处理程序为timer_interrupt
- * 使能时钟中断
+ * __使能时钟中断__
  * 设置系统调用中断处理程序为system_call
 
 
