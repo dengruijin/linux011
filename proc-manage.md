@@ -43,7 +43,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
 
 ### *fork创建进程  
   * find_empty_process
-  * 
+  * copy_process
 
 ### *进程0与进程1
 进程0称为idle进程，进程1称为init进程
