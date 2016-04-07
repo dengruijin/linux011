@@ -24,4 +24,5 @@
     //sched.c
     void schedule(void)
     void sleep_on(struct task_struct **p)
+    void wake_up(struct task_struct **p)
     
