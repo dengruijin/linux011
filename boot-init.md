@@ -153,8 +153,10 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 #### time_init
 #### sched_init
  * 在GDT中设置task0的tss和ldt描述符项
+        set_tss_desc(gdt+FIRST_TSS_ENTRY,&(init_task.task.tss));
+        set_ldt_desc(gdt+FIRST_LDT_ENTRY,&(init_task.task.ldt));
  * 清空除task0以外进程的进程表和tss、ldt描述符
-       	p = gdt+2+FIRST_TSS_ENTRY;
+        p = gdt+2+FIRST_TSS_ENTRY;
         for(i=1;i<NR_TASKS;i++) {
             task[i] = NULL;
             p->a=p->b=0;
@@ -162,6 +164,8 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
             p->a=p->b=0;
             p++;
         }
+ * 清除标志寄存器的NT标志位
+ * 
 
 #### buffer_init
 #### hd_init
