@@ -152,6 +152,8 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 #### tty_init
 #### time_init
 #### sched_init
+ * 在GDT中设置task0的tss和ldt描述符项
+ * 
 #### buffer_init
 #### hd_init
 #### floppy_init
