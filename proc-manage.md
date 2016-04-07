@@ -13,8 +13,8 @@ linux0.11中一个进程有以下主要要素：
       // sched.c Line65
       struct task_struct * task[NR_TASKS] = {&(init_task.task), };
 
-* ldt
-
+* ldt和tss
+每创建一个进程就会在GDT中填充相应的ldt和tss段描述符
 * tss
 
 
