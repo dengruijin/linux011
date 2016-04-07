@@ -8,11 +8,11 @@
     
     //sched.c
     struct task_struct * task[NR_TASKS] = {&(init_task.task), };
+    long volatile jiffies=0;
     union task_union {
         struct task_struct task;
         char stack[PAGE_SIZE];
     };
-    long volatile jiffies=0;
 进程创建
     
     //system_call.s
