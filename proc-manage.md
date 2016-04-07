@@ -12,6 +12,19 @@ linux0.11中一个进程有以下主要要素：
 
       // sched.c Line65
       struct task_struct * task[NR_TASKS] = {&(init_task.task), };
+
+* ldt
+
+* tss
+
+
+
+
+
+
+
+
+
 数据结构
 
     //sched.h
