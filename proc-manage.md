@@ -43,6 +43,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
 
 ### *fork创建进程  
   * find_empty_process
+  kernel/fork.c 135.
   * copy_process
 
 ### *进程0与进程1
