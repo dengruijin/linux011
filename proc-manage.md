@@ -5,7 +5,7 @@ linux0.11中一个进程有以下主要要素：
 * LDT段
 * 用户态栈
 * 内核态栈
-
+## *全局数据
 * linux0.11的PCB用结构体task_struct来表示，存放了一个进程的各种信息  
 包括pid,state,priority(优先级),counter(剩余时间片),tss,ldt等...
 * 全局变量task[NR_TASKS]数组包含所有PCB
