@@ -10,5 +10,8 @@
 进程创建
 
 进程调度
-
+    
+    //sched.c
     void schedule(void)
+    void sleep_on(struct task_struct **p)
+    
