@@ -167,6 +167,10 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
  * 清除标志寄存器的NT标志位
  * 加载task0的tss段选择符到tr寄存器
  * 加载task0的ldt选择符到ldtr寄存器
+ * 配置8253定时器，使它每10ms发出一个IRQ0
+        outb_p(0x36,0x43);		/* binary, mode 3, LSB/MSB, ch 0 */
+        outb_p(LATCH & 0xff , 0x40);	/* LSB */
+        outb(LATCH >> 8 , 0x40);	/* MSB */
 
 #### buffer_init
 #### hd_init
