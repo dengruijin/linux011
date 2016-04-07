@@ -7,6 +7,7 @@
     struct desc_struct
     //sched.c
     struct task_struct * task[NR_TASKS] = {&(init_task.task), };
+    union task_union
 进程创建
     
     //system_call.s
