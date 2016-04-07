@@ -171,7 +171,9 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         outb_p(0x36,0x43);		/* binary, mode 3, LSB/MSB, ch 0 */
         outb_p(LATCH & 0xff , 0x40);	/* LSB */
         outb(LATCH >> 8 , 0x40);	/* MSB */
-
+ * 设置时钟中断处理程序为timer_interrupt
+ * 使能时钟中断
+ * 设置系统调用中断处理程序为system_call
 #### buffer_init
 #### hd_init
 #### floppy_init
