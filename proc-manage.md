@@ -11,6 +11,7 @@
     
     //system_call.s
     sys_fork
+    
     //fork.c
     int find_empty_process(void)
     int copy_process(int nr,long ebp,long edi,long esi,long gs,long none,
