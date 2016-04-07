@@ -1,3 +1,12 @@
+# *linux-0.11进程管理
+linux0.11中一个进程有以下要素：
+* 进程属性
+* 
+
+linux0.11的PCB用结构体task_struct来表示，存放了一个进程的各种信息，全局变量task[NR_TASKS]数组包含所有PCB
+
+    // sched.c Line65
+    struct task_struct * task[NR_TASKS] = {&(init_task.task), };
 数据结构
 
     //sched.h
