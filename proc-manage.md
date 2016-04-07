@@ -30,11 +30,9 @@ __*linux0.11中，每一个进程都有自己的用户栈，内核栈和tss段*_
             return; //若当前进程时间片用完则调用schedule
         current->counter=0;
         if (!cpl) return; //cpl表示进程被中断时的特权级,0表示内核态
-        schedule();//进入调度
-    
+        schedule();//进入调度    
 * schedule:位于sched.c,进程调度函数选取就绪进程中counter最大的进程来执行
-* switch_to(n):位于sched.h,
-
+* switch_to(n):位于sched.h,n表示task数组的下标
 
 
 
