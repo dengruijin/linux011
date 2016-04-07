@@ -165,7 +165,8 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
             p++;
         }
  * 清除标志寄存器的NT标志位
- * 
+ * 加载task0的tss段选择符到tr寄存器
+ * 加载task0的ldt选择符到ldtr寄存器
 
 #### buffer_init
 #### hd_init
