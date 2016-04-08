@@ -50,7 +50,8 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
   kernel/fork.c 135.取得一个可用的pid和空的task下标,可用的pid放在全局变量last_pid,task下标作为返回值返回
   * 将参数入栈后调用copy_process()
   * copy_process
-  kernel/fork.c 68.输入参数是当前进程所有寄存器的值。该函数首先get_free_page()获得一页空闲内存,用来存放task_struct数据,填充task_struct内的数据,
+  kernel/fork.c 68.输入参数是当前进程所有寄存器的值。该函数首先get_free_page()获得一页空闲内存,用来存放task_struct数据,填充task_struct内的数据,然后调用copy_mem复制页表
+  * copy_mem
 
 ### *进程0与进程1
 进程0称为idle进程，进程1称为init进程
