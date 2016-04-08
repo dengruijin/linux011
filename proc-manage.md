@@ -28,7 +28,8 @@ __*linux0.11中，每一个进程都有自己的用户栈，内核栈和tss段*_
 每10ms发生一次时钟中断，执行的函数如下：
 * __*timer_interrupt*__:时钟中断处理程序的入口，在system_call.s中 ，它将jiffies加1后调用sched.c的do_timer函数
 * __*do_timer(cpl)*__:
-  位于sched.c,输入参数c,
+  位于sched.c,
+  
           if ((--current->counter)>0) 
               return; //若当前进程时间片用完则调用schedule
           current->counter=0;
