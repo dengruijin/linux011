@@ -115,6 +115,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
   * 在GDT中配置新进程的tss和ldt描述符
   * 将新进程state设为TASK_RUNNING
   * 返回last_pid,即新进程的pid
+#####fork过程总结：
 
 ### *进程0与进程1
 进程0称为idle进程，进程1称为init进程
