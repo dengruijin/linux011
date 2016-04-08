@@ -54,7 +54,8 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
   * copy_mem
   kernel/fork.c 40. 设置ldt描述符分配线性地址空间,然后调用copy_page_tables复制页表
   * copy_page_tables
-  mm/memory.c 150. 
+  mm/memory.c 150. 输入参数old_data_base,new_data_base,data_limit
+  
 
 ### *进程0与进程1
 进程0称为idle进程，进程1称为init进程
