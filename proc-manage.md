@@ -65,7 +65,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
               unsigned long * from_page_table,* to_page_table;
               unsigned long this_page, nr;
               unsigned long * from_dir, * to_dir;
-              
+              // from和to必须是4MB的倍数
               if ((from&0x3fffff) || (to&0x3fffff))
                   panic("copy_page_tables called with wrong alignment");
               from_dir = (unsigned long *) ((from>>20) & 0xffc); /* _pg_dir = 0 */
