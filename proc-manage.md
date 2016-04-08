@@ -93,6 +93,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
                       this_page = *from_page_table;
                       if (!(1 & this_page))
                           continue;
+                      // 新进程的这一页设为只读
                       this_page &= ~2; // R/W位清0，表示只读
                       *to_page_table = this_page;
                       // LOW_MEM=1MB
