@@ -52,7 +52,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
 
 ### *进程0与进程1
 进程0称为idle进程，进程1称为init进程
-进程0的数据在
+进程0的数据在sched_init()中被初始化，但执行move_to_user_mode()后才真正以进程0的身份运行
 
 
 
