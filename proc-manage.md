@@ -66,57 +66,57 @@ __注意:__在linux高版本内核已经不采用这种切换方式了，而是�
  
   该函数复制原进程的页表   
 
-          int copy_page_tables(unsigned long from,unsigned long to,long size)
-          {
-              unsigned long * from_page_table,* to_page_table;
-              unsigned long this_page, nr;
-              unsigned long * from_dir, * to_dir;
-              // from和to必须是4MB的倍数
-              if ((from&0x3fffff) || (to&0x3fffff))
-                  panic("copy_page_tables called with wrong alignment");
-              //from_dir和to_dir分别指向相应的PDE的指针, 即*from_dir表示PDE内容
-              from_dir = (unsigned long *) ((from>>20) & 0xffc);
-              to_dir = (unsigned long *) ((to>>20) & 0xffc);
-              // 这个运算是进1取整，即末尾不足4MB的按4MB计算,得到的size等于要复制的页表数目(即PDE数目)
-              size = ((unsigned) (size+0x3fffff)) >> 22;
-              // 循环复制每一个要复制的页表
-              for( ; size-->0 ; from_dir++,to_dir++) {
-                  if (1 & *to_dir)
-                      panic("copy_page_tables: already exist");
-                  if (!(1 & *from_dir))
-                      continue;
-                  // 从PDE的获得页表地址(该地址是4KB对齐的,所以低12位为0)
-                  from_page_table = (unsigned long *) (0xfffff000 & *from_dir);
-                  // get_free_page()申请一页空闲内存用于存放新进程的一个页表
-                  if (!(to_page_table = (unsigned long *) get_free_page()))
-                      return -1;	/* Out of memory, see freeing */
-                  // 将该页表基址或上属性位，赋值给PDE
-                  *to_dir = ((unsigned long) to_page_table) | 7;
-                  // from==0 说明老进程是task0(limit=640KB),只需复制160项PTE,即映射640KB物理内存
-                  nr = (from==0)?0xA0:1024;
-                  // 循环复制页表中的每一项(PTE)
-                  for ( ; nr-- > 0 ; from_page_table++,to_page_table++) {
-                      this_page = *from_page_table;
-                      if (!(1 & this_page))
-                          continue;
-                      // 新进程的这一页设为只读
-                      this_page &= ~2; // R/W位清0，表示只读
-                      *to_page_table = this_page;
-                      // LOW_MEM=1MB,task0不会进入if里面
-                      if (this_page > LOW_MEM) {
-                          // 将原进程的该页也设为只读
-                          *from_page_table = this_page;
-                          // 减去LOW_MEM再除以4096才是该物理页对应的mem_map数组下标
-                          this_page -= LOW_MEM;
-                          this_page >>= 12;
-                          // 对页面的引用记录加1
-                          mem_map[this_page]++;
-                      }
-                  }
-              }
-              invalidate();  //刷新页表高速缓存TLB
-              return 0;
-          }
+        int copy_page_tables(unsigned long from,unsigned long to,long size)
+        {
+            unsigned long * from_page_table,* to_page_table;
+            unsigned long this_page, nr;
+            unsigned long * from_dir, * to_dir;
+            // from和to必须是4MB的倍数
+            if ((from&0x3fffff) || (to&0x3fffff))
+                panic("copy_page_tables called with wrong alignment");
+            //from_dir和to_dir分别指向相应的PDE的指针, 即*from_dir表示PDE内容
+            from_dir = (unsigned long *) ((from>>20) & 0xffc);
+            to_dir = (unsigned long *) ((to>>20) & 0xffc);
+            // 这个运算是进1取整，即末尾不足4MB的按4MB计算,得到的size等于要复制的页表数目(即PDE数目)
+            size = ((unsigned) (size+0x3fffff)) >> 22;
+            // 循环复制每一个要复制的页表
+            for( ; size-->0 ; from_dir++,to_dir++) {
+                if (1 & *to_dir)
+                    panic("copy_page_tables: already exist");
+                if (!(1 & *from_dir))
+                    continue;
+                // 从PDE的获得页表地址(该地址是4KB对齐的,所以低12位为0)
+                from_page_table = (unsigned long *) (0xfffff000 & *from_dir);
+                // get_free_page()申请一页空闲内存用于存放新进程的一个页表
+                if (!(to_page_table = (unsigned long *) get_free_page()))
+                    return -1;	/* Out of memory, see freeing */
+                // 将该页表基址或上属性位，赋值给PDE
+                *to_dir = ((unsigned long) to_page_table) | 7;
+                // from==0 说明老进程是task0(limit=640KB),只需复制160项PTE,即映射640KB物理内存
+                nr = (from==0)?0xA0:1024;
+                // 循环复制页表中的每一项(PTE)
+                for ( ; nr-- > 0 ; from_page_table++,to_page_table++) {
+                    this_page = *from_page_table;
+                    if (!(1 & this_page))
+                        continue;
+                    // 新进程的这一页设为只读
+                    this_page &= ~2; // R/W位清0，表示只读
+                    *to_page_table = this_page;
+                    // LOW_MEM=1MB,task0不会进入if里面
+                    if (this_page > LOW_MEM) {
+                        // 将原进程的该页也设为只读
+                        *from_page_table = this_page;
+                        // 减去LOW_MEM再除以4096才是该物理页对应的mem_map数组下标
+                        this_page -= LOW_MEM;
+                        this_page >>= 12;
+                        // 对页面的引用记录加1
+                        mem_map[this_page]++;
+                    }
+                }
+            }
+            invalidate();  //刷新页表高速缓存TLB
+            return 0;
+        }
   * 页表复制成功之后，对老进程中打开的文件，把文件打开次数加1
   * 在GDT中配置新进程的tss和ldt描述符
   * 将新进程`state`设为`TASK_RUNNING`
