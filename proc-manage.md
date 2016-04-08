@@ -91,6 +91,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
                           continue;
                       this_page &= ~2;
                       *to_page_table = this_page;
+                      // LOW_MEM=1MB
                       if (this_page > LOW_MEM) {
                           *from_page_table = this_page;
                           this_page -= LOW_MEM;
