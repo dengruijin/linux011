@@ -44,9 +44,11 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
       ljmp tss_B //从进程A切换到进程B执行
 这时，**ljmp执行时保存的进程A上下文是处于内核态的**,恢复给CPU的进程B上下文也是内核态的，那用户态的上下文保存在哪呢？通过中断的现场保护保存在内核栈中，中断返回时就返回到用户态了.
 
-### *fork创建进程  
+### *fork创建进程
+  * sys_fork system_call.s
   * find_empty_process   
   kernel/fork.c 135.取得一个可用的pid和空的task下标,可用的pid放在全局变量last_pid,task下标作为返回值返回
+  * 将参数入栈后调用copy_process()
   * copy_process
   kernel/fork.c 68.
 
