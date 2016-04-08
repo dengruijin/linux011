@@ -71,6 +71,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
               //from_dir和to_dir分别指向相应的PDE的指针, 即*from_dir表示PDE内容
               from_dir = (unsigned long *) ((from>>20) & 0xffc);
               to_dir = (unsigned long *) ((to>>20) & 0xffc);
+              // 这个运算是进1取整，即末尾不足4MB的按4MB计算
               size = ((unsigned) (size+0x3fffff)) >> 22;
               for( ; size-->0 ; from_dir++,to_dir++) {
                   if (1 & *to_dir)
