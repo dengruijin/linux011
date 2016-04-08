@@ -58,8 +58,9 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
   输入参数:
     * old_data_base,原进程数据段基址
     * new_data_base,新进程数据段基址
-    * data_limit,段限长
-    该函数复制原进程的页表
+    * data_limit,段限长  
+    该函数复制原进程的页表  
+    
           int copy_page_tables(unsigned long from,unsigned long to,long size)
           {
               unsigned long * from_page_table,* to_page_table;
