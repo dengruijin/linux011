@@ -86,6 +86,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
                       return -1;	/* Out of memory, see freeing */
                   // 将该页表基址或上属性位，赋值给PDE
                   *to_dir = ((unsigned long) to_page_table) | 7;
+                  // from==0 说明老进程是task0,只需复制160项PTE,即映射640KB内存
                   nr = (from==0)?0xA0:1024;
                   // 循环复制页表中的每一项(PTE)
                   for ( ; nr-- > 0 ; from_page_table++,to_page_table++) {
