@@ -116,7 +116,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
   * 将新进程state设为TASK_RUNNING
   * 返回last_pid,即新进程的pid
 #####fork过程总结：
-进入int sys_fork()函数，首先获取一个空的task数组下标和可用的pid,然后以所有寄存器值为参数调用int copy_process(...)来初始化新进程的task_struct,新进程的tss.eax设为0,这就是为什么fork返回时子进程的返回值为0。随后为新进程划分线性地址空间(nr*64MB),复制老进程的页表给新进程，但页目录表只有一个，是所有进程公用的。最后在GDT中添加tss和ldt段的描述符，并把新进程的state设为TASK_RUNNING
+进入int sys_fork()函数，首先获取一个空的task数组下标和可用的pid,然后以所有寄存器值为参数调用int copy_process(...)来初始化新进程的task_struct,新进程的tss.eax设为0,这就是为什么fork返回时子进程的返回值为0。随后为新进程划分线性地址空间(nr*64MB),复制老进程的页表给新进程，但页目录表只有一个，是所有进程公用的。最后在GDT中添加tss和ldt段的描述符，并把新进程的state设为TASK_RUNNING.到此新进程创建完毕并成为就绪状态。copy_process函数的返回值是子进程的pid,同时也是sys_fork和fork的返回值
 ---
 ### *进程0与进程1
 进程0称为idle进程，进程1称为init进程
