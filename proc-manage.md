@@ -79,6 +79,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
                       panic("copy_page_tables: already exist");
                   if (!(1 & *from_dir))
                       continue;
+                  // 从PDE的获得页表地址
                   from_page_table = (unsigned long *) (0xfffff000 & *from_dir);
                   if (!(to_page_table = (unsigned long *) get_free_page()))
                       return -1;	/* Out of memory, see freeing */
