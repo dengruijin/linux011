@@ -84,6 +84,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
                       return -1;	/* Out of memory, see freeing */
                   *to_dir = ((unsigned long) to_page_table) | 7;
                   nr = (from==0)?0xA0:1024;
+                  // 循环复制页表中的每一项(PTE)
                   for ( ; nr-- > 0 ; from_page_table++,to_page_table++) {
                       this_page = *from_page_table;
                       if (!(1 & this_page))
