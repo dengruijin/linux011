@@ -68,7 +68,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
               // from和to必须是4MB的倍数
               if ((from&0x3fffff) || (to&0x3fffff))
                   panic("copy_page_tables called with wrong alignment");
-              //from_dir和to_dir分别指向相应的PDE的指针
+              //from_dir和to_dir分别指向相应的PDE的指针, 即*from_dir表示PDE内容
               from_dir = (unsigned long *) ((from>>20) & 0xffc);
               to_dir = (unsigned long *) ((to>>20) & 0xffc);
               size = ((unsigned) (size+0x3fffff)) >> 22;
