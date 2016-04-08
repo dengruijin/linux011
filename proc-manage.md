@@ -59,6 +59,45 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
     * old_data_base,原进程数据段基址
     * new_data_base,新进程数据段基址
     * data_limit,段限长
+    该函数复制原进程的页表
+          int copy_page_tables(unsigned long from,unsigned long to,long size)
+          {
+              unsigned long * from_page_table,* to_page_table;
+              unsigned long this_page, nr;
+              unsigned long * from_dir, * to_dir;
+              
+              if ((from&0x3fffff) || (to&0x3fffff))
+                  panic("copy_page_tables called with wrong alignment");
+              from_dir = (unsigned long *) ((from>>20) & 0xffc); /* _pg_dir = 0 */
+              to_dir = (unsigned long *) ((to>>20) & 0xffc);
+              size = ((unsigned) (size+0x3fffff)) >> 22;
+              for( ; size-->0 ; from_dir++,to_dir++) {
+                  if (1 & *to_dir)
+                      panic("copy_page_tables: already exist");
+                  if (!(1 & *from_dir))
+                      continue;
+                  from_page_table = (unsigned long *) (0xfffff000 & *from_dir);
+                  if (!(to_page_table = (unsigned long *) get_free_page()))
+                      return -1;	/* Out of memory, see freeing */
+                  *to_dir = ((unsigned long) to_page_table) | 7;
+                  nr = (from==0)?0xA0:1024;
+                  for ( ; nr-- > 0 ; from_page_table++,to_page_table++) {
+                      this_page = *from_page_table;
+                      if (!(1 & this_page))
+                          continue;
+                      this_page &= ~2;
+                      *to_page_table = this_page;
+                      if (this_page > LOW_MEM) {
+                          *from_page_table = this_page;
+                          this_page -= LOW_MEM;
+                          this_page >>= 12;
+                          mem_map[this_page]++;
+                      }
+                  }
+              }
+              invalidate();
+              return 0;
+          }
   
 
 ### *进程0与进程1
