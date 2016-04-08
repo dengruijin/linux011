@@ -29,11 +29,11 @@ __*linux0.11中，每一个进程都有自己的用户栈，内核栈和tss段*_
 * __*timer_interrupt*__:时钟中断处理程序的入口，在system_call.s中 ，它将jiffies加1后调用sched.c的do_timer函数
 * __*do_timer(cpl)*__:
   位于sched.c,输入参数c,
-        if ((--current->counter)>0) 
-            return; //若当前进程时间片用完则调用schedule
-        current->counter=0;
-        if (!cpl) return; //cpl表示进程被中断时的特权级,0表示内核态
-        schedule();//进入调度    
+          if ((--current->counter)>0) 
+              return; //若当前进程时间片用完则调用schedule
+          current->counter=0;
+          if (!cpl) return; //cpl表示进程被中断时的特权级,0表示内核态
+          schedule();//进入调度    
 * __*schedule*__:位于sched.c,进程调度函数选取就绪进程中counter最大的进程来执行
 * __*switch_to(n)*__:位于sched.h,n表示task数组的下标.造成进程切换的关键语句是
       "ljmp %0\n\t" // 执行长跳转至*&__tmp，造成任务切换。
@@ -41,7 +41,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
 **注意：**在linux高版本内核已经不采用这种切换方式了，而是将上下文保存在进程表中。  
 还有一点要注意的是：  
 假设当前进程A在执行，此时发生调度，执行下面指令：
-      ljmp tss_B //从进程A切换到进程B执行
+        ljmp tss_B //从进程A切换到进程B执行
 这时，**ljmp执行时保存的进程A上下文是处于内核态的**,恢复给CPU的进程B上下文也是内核态的，那用户态的上下文保存在哪呢？通过中断的现场保护保存在内核栈中，中断返回时就返回到用户态了.
 
 ### *fork创建进程
