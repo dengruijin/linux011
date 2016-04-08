@@ -81,7 +81,7 @@ ljmp tss_selector指令用于切换任务,执行该指令时CPU自动保存此�
                       continue;
                   // 从PDE的获得页表地址(该地址是4KB对齐的,所以低12位为0)
                   from_page_table = (unsigned long *) (0xfffff000 & *from_dir);
-                  // get_free_page()申请一页空闲内存用于存放新进程的页表
+                  // get_free_page()申请一页空闲内存用于存放新进程的一个页表
                   if (!(to_page_table = (unsigned long *) get_free_page()))
                       return -1;	/* Out of memory, see freeing */
                   *to_dir = ((unsigned long) to_page_table) | 7;
