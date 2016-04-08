@@ -15,8 +15,8 @@ __*linux0.11中，每一个进程都有自己的用户栈，内核栈和tss段*_
 包括pid,state,priority(优先级),counter(剩余时间片),tss,ldt等...
 * 全局变量task[NR_TASKS]数组包含所有PCB的指针
 
-      // sched.c Line65
-      struct task_struct * task[NR_TASKS] = {&(init_task.task), };
+        // sched.c Line65
+        struct task_struct * task[NR_TASKS] = {&(init_task.task), };
 
 * ldt和tss
 每创建一个进程就会在GDT中填充相应的ldt和tss段描述符
