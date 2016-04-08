@@ -60,10 +60,10 @@ __注意:__在linux高版本内核已经不采用这种切换方式了，而是�
   * copy_page_tables
   mm/memory.c 150.   
   输入参数:  
-    * old_data_base,原进程数据段基址
-    * new_data_base,新进程数据段基址
-    * data_limit,段限长  
-    该函数复制原进程的页表  
+   - old_data_base,原进程数据段基址
+   - new_data_base,新进程数据段基址
+   - data_limit,段限长  
+   该函数复制原进程的页表  
     
           int copy_page_tables(unsigned long from,unsigned long to,long size)
           {
