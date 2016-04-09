@@ -174,7 +174,11 @@ do_execve()可以加载文件系统上的可执行文件至进程空间，然后
 >f. `create_tables()`在栈空间创建参数和环境变量指针表供程序的main函数使用  
 >g. 设置进程的brk和uid,gid等
 
-9.
+9.最后，关键一步，设置系统调用返回后的eip:
+
+    eip[0] = ex.a_entry;		/* eip, magic happens :-) */
+    eip[3] = p;			/* stack pointer */
+    return 0;
 
 ---
 
