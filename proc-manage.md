@@ -171,13 +171,13 @@ do_execve()可以加载文件系统上的可执行文件至进程空间，然后
 >c. 关闭原进程打开的文件  
 >d. 根据当前进程的段基地址和限长，释放代码段和数据段对应的内存页表指定的物理内存页和页表本身.(free_page_tables)   
 >e. `change_ldt`修改ldt描述符,将代码段限长设为执行文件指定的长度(按页大小进1取整),数据段限长为64MB。**这里还将调用`put_page()`把参数和环境变量所在的物理页映射到进程的数据段末尾处！**  
->f. `create_tables()`在栈空间创建参数和环境变量指针表供程序的main函数使用  
+>f. `create_tables()`在栈空间创建参数和环境变量指针表供程序的main函数使用,返回的p就是栈指针,见步骤9  
 >g. 设置进程的brk和uid,gid等
 
 9.最后，关键一步，设置系统调用返回后的eip:
 
-    eip[0] = ex.a_entry;		/* eip, magic happens :-) */
-    eip[3] = p;			/* stack pointer */
+    eip[0] = ex.a_entry; /* eip, magic happens :-) */
+    eip[3] = p;	/*stack pointer return from create_tables() */
     return 0;
 __*注意:*__ 
 #### do_execve过程总结
