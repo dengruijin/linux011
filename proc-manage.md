@@ -160,7 +160,7 @@ do_execve()可以加载文件系统上的可执行文件至进程空间，然后
         if (!sh_bang) {
                 p = copy_strings(envc,envp,page,p,0);
                 p = copy_strings(argc,argv,page,p,0);
-                if (!p) {
+                if (!p) { // 内存不足
                     retval = -ENOMEM;
                     goto exec_error2;
                 }
