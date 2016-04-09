@@ -179,7 +179,7 @@ do_execve()可以加载文件系统上的可执行文件至进程空间，然后
     eip[0] = ex.a_entry; /* eip, magic happens :-) */
     eip[3] = p;	/*stack pointer return from create_tables() */
     return 0;
-__*注意:*__ 
+__*注意:*__ 这里并没有立即将程序加载到内存中，而是在程序执行时发生缺页中断再加载并映射相应的页。
 #### do_execve过程总结
 
 ---
