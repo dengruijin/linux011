@@ -165,7 +165,11 @@ do_execve()可以加载文件系统上的可执行文件至进程空间，然后
                     goto exec_error2;
                 }
         }
-8.`current->executable`设为新可执行文件的inode
+8.接下来就可以改造进程环境了：
+>`current->executable`设为新可执行文件的inode
+>复位原进程信号处理句柄
+>关闭原进程打开的文件
+>
 9.
 
 ---
