@@ -179,7 +179,8 @@ do_execve()可以加载文件系统上的可执行文件至进程空间，然后
     eip[0] = ex.a_entry;		/* eip, magic happens :-) */
     eip[3] = p;			/* stack pointer */
     return 0;
-
+__*注意:*__ 
+#### do_execve过程总结
 
 ---
 
