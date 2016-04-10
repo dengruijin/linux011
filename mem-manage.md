@@ -30,6 +30,9 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
 * 映射物理页至指定线性地址：  
       //page是物理页首地址,address是线性地址
       unsigned long put_page(unsigned long page,unsigned long address)
+* 申请并映射物理页值指定线性地址：
+      void get_empty_page(unsigned long address)
+      //该函数的实现是对get_free_page和put_page的封装。
 ### *缺页&写保护异常处理
 
 
