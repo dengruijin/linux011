@@ -19,7 +19,11 @@ linux0.11默认支持的最大物理内存是16MB，被划分成五大块：
 mem_map[]字节数组记录了主内存区中每一个物理页的使用情况，若mem_map[i]=0说明第i页是空闲的。
 * 申请内存页：get_free_page(void)  
 从mem_map[]数组从后往前扫描，寻找值为0的项（空闲页），若找到了则将该项置1,计算出该页的首地址，并对该页内容清零，然后返回该页开始处的物理地址。
-* 释放内存页：
+* 释放内存页：free_page(unsigned long addr)  
+计算出物理地址addr对应的页号，若mem_map[]对应项的值>0则将其减去1.
+* 复制页表对应的连续内存空间和页表本身：  
+       int free_page_tables(unsigned long from,unsigned long size)
+* 释放指定线性地址和长度对应的物理页和页表：  
 
 ### *缺页异常处理
 
