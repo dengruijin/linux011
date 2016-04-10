@@ -4,7 +4,7 @@ linux0.11默认支持的最大物理内存是16MB，被划分成五大块：
 * 内核映像(system模块占用)
 * 高速缓冲区
 * ROM BIOS
-* RAMDISK
+* RAMDISK(可选)
 * 主内存区
 ![内存布局](file:///home/deng/pictures/linux0.11-mem-layout.png)
 
