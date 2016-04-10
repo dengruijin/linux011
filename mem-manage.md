@@ -11,4 +11,8 @@
     static unsigned char mem_map [ PAGING_PAGES ] = {0,};
     
 ##关键函数
-unsigned long get_free_page(void)
+    
+    unsigned long get_free_page(void)
+    void free_page(unsigned long addr)
+    int free_page_tables(unsigned long from,unsigned long size)
+    int copy_page_tables(unsigned long from,unsigned long to,long size)
