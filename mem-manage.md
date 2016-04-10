@@ -17,20 +17,20 @@ linux0.11默认支持的最大物理内存是16MB，被划分成五大块：
 ![线性地址空间](file:///home/deng/pictures/liner-addr-layout.png)
 ### *内存的申请与释放
 mem_map[]字节数组记录了主内存区中每一个物理页的使用情况，若mem_map[i]=0说明第i页是空闲的。
-* 申请内存页：get_free_page(void)  
+* __申请内存页__：get_free_page(void)  
 从mem_map[]数组从后往前扫描，寻找值为0的项（空闲页），若找到了则将该项置1,计算出该页的首地址，并对该页内容清零，然后返回该页开始处的物理地址。
-* 释放内存页：free_page(unsigned long addr)  
+* __释放内存页__：free_page(unsigned long addr)  
 计算出物理地址addr对应的页号，若mem_map[]对应项的值>0则将其减去1.
-* 复制指定线性地址和长度对应的物理页和页表：  
+* __复制指定线性地址和长度对应的物理页和页表__：  
        //from，to是线性地址， size是要复制的字节数,fork时用到
        int copy_page_tables(unsigned long from,unsigned long to,long size)
-* 释放指定线性地址和长度对应的物理页和页表：  
+* __释放指定线性地址和长度对应的物理页和页表__：  
        //from是线性地址， size是要释放的字节数,exit时用到
        int free_page_tables(unsigned long from,unsigned long size)
-* 映射物理页至指定线性地址：  
+* __映射物理页至指定线性地址__：  
       //page是物理页首地址,address是线性地址
       unsigned long put_page(unsigned long page,unsigned long address)
-* 申请并映射物理页值指定线性地址：
+* __申请并映射物理页值指定线性地址__：
       //缺页异常处理时会用到
       void get_empty_page(unsigned long address)
       //该函数的实现是对get_free_page和put_page的封装。
