@@ -2,7 +2,11 @@
 ### *内存布局
 linux0.11默认支持的最大物理内存是16MB，被划分成五大块：
 * 内核映像(system模块占用),
-* 高速缓冲区
+* 高速缓冲区。  
+缓冲区的末端地址`BUF_END`是根据物理内存RAM大小而分配的,
+  * 若RAM>12MB,则BUF_END=4MB
+  * 若RAM>6MB,则BUF_END=2MB
+  * 若RAM>12MB,则BUF_END=4MB
 * ROM BIOS
 * RAMDISK(可选)
 * 主内存区
