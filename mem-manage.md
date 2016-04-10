@@ -16,3 +16,4 @@
     void free_page(unsigned long addr)
     int free_page_tables(unsigned long from,unsigned long size)
     int copy_page_tables(unsigned long from,unsigned long to,long size)
+    unsigned long put_page(unsigned long page,unsigned long address)
