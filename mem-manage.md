@@ -25,7 +25,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
        //from，to是线性地址， size是要复制的字节数
        int copy_page_tables(unsigned long from,unsigned long to,long size)
 * 释放指定线性地址和长度对应的物理页和页表：  
-       //from是线性地址， size是要释放的字节数
+       //from是线性地址， size是要释放的字节数,exit时用到
        int free_page_tables(unsigned long from,unsigned long size)
 * 映射物理页至指定线性地址：  
       //page是物理页首地址,address是线性地址
