@@ -38,7 +38,8 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
 
 
 ### *进程间共享内存
-
+      static int try_to_share(unsigned long address, struct task_struct * p)
+      static int share_page(unsigned long address)
 
 
 ---
