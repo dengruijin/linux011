@@ -22,9 +22,9 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
 * 释放内存页：free_page(unsigned long addr)  
 计算出物理地址addr对应的页号，若mem_map[]对应项的值>0则将其减去1.
 * 复制页表对应的连续内存空间和页表本身：  
-       int free_page_tables(unsigned long from,unsigned long size)
+        int copy_page_tables(unsigned long from,unsigned long to,long size)
 * 释放指定线性地址和长度对应的物理页和页表：  
-
+       int free_page_tables(unsigned long from,unsigned long size)
 ### *缺页异常处理
 
 
