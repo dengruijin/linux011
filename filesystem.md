@@ -57,7 +57,7 @@ inode中的i_mode字段表示文件的类型，权限等属性：
  ![数据访问函数](./img/fs-data-access-funcs.png)
  ![进程打开文件](./img/proc-to-file.png)
 
-### 文件高层操作
+### *文件高层操作
 ![fs上层操作](./img/fs-high-lev-op.png)
  open.c主要用于文件的打开创建关闭，属性修改等  
  exec.c主要用于do_execve()  
