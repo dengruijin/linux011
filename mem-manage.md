@@ -125,11 +125,11 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
     /* share them: write-protect */
         *(unsigned long *) from_page &= ~2; // 要共享了，设该页为只读
         *(unsigned long *) to_page = *(unsigned long *) from_page;
-        invalidate();
+        invalidate(); // 刷新TLB
         phys_addr -= LOW_MEM;
         phys_addr >>= 12;
-        mem_map[phys_addr]++;
-        return 1;
+        mem_map[phys_addr]++; 该页引用数加1
+        return 1; // 共享成功，返回1
     }
 
       // address是进程中的逻辑地址
