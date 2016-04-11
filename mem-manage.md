@@ -111,7 +111,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
         phys_addr &= 0xfffff000; // 得到物理地址
         if (phys_addr >= HIGH_MEMORY || phys_addr < LOW_MEM)
             return 0;
-        to = *(unsigned long *) to_page;
+        to = *(unsigned long *) to_page; // 当前进程PDE内容
         if (!(to & 1)) {
             if ((to = get_free_page()))
                 *(unsigned long *) to_page = to | 7;
