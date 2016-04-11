@@ -108,7 +108,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
     /* is the page clean and present? */
         if ((phys_addr & 0x41) != 0x01)
             return 0; // 若Dirty位=1说明修改过，无法共享
-        phys_addr &= 0xfffff000;
+        phys_addr &= 0xfffff000; // 得到物理地址
         if (phys_addr >= HIGH_MEMORY || phys_addr < LOW_MEM)
             return 0;
         to = *(unsigned long *) to_page;
