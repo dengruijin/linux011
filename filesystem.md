@@ -56,3 +56,8 @@ inode中的i_mode字段表示文件的类型，权限等属性：
  主要涉及`block_dev.c、file_dev.c、char_dev.c、pipe_dev.c`和`read_write.c`。read_write.c中包含read()和write()系统调用，它们通过对所操作文件属性的判断来调用这些文件中相关的函数。
  ![数据访问函数](./img/fs-data-access-funcs.png)
  ![进程打开文件](./img/proc-to-file.png)
+ ![fs上层操作](./img/fs-high-lev-op.png)
+ open.c主要用于文件的打开创建关闭，属性修改等  
+ exec.c主要用于do_execve()  
+ fcntl.c主要实现了fcntl()和dup(),dup2()  
+ 
