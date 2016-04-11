@@ -31,7 +31,7 @@ inode中的i_mode字段表示文件的类型，权限等属性：
 * bread()
 * breada()
 * bread_page()
-### 文件系统底层函数
+### *文件系统底层函数
 * i节点位图和逻辑块位图操作函数 bitmap.c
     * free_inode()
     * new_inode()
@@ -53,12 +53,12 @@ inode中的i_mode字段表示文件的类型，权限等属性：
 
  ![fs底层函数关系](./img/fs-low-lev-funs.png)
  
- ### 文件数据的访问
+ ### *文件数据的访问
  主要涉及`block_dev.c、file_dev.c、char_dev.c、pipe_dev.c`和`read_write.c`。read_write.c中包含read()和write()系统调用，它们通过对所操作文件属性的判断来调用这些文件中相关的函数。
  ![数据访问函数](./img/fs-data-access-funcs.png)
  ![进程打开文件](./img/proc-to-file.png)
 
-### 文件高层操作
+### *文件高层操作
 ![fs上层操作](./img/fs-high-lev-op.png)
  open.c主要用于文件的打开创建关闭，属性修改等  
  exec.c主要用于do_execve()  
