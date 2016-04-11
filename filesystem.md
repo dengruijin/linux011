@@ -46,5 +46,6 @@ inode中的i_mode字段表示文件的类型，权限等属性：
     * get_super()
     * put_super()
     * free_super()
-    * sys_mount()
-    * 
+    * sys_mount()  
+
+ ![fs底层函数关系](./img/fs-low-lev-funs.png)
