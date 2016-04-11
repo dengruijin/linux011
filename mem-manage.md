@@ -101,9 +101,10 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
         from = *(unsigned long *) from_page;
         if (!(from & 1)) 
             return 0; // 存在位=0，无法共享
-        from &= 0xfffff000;
+        from &= 0xfffff000; // 得到页表地址
+        // 得到PTE地址
         from_page = from + ((address>>10) & 0xffc);
-        phys_addr = *(unsigned long *) from_page;
+        phys_addr = *(unsigned long *) from_page; //// PTE内容
     /* is the page clean and present? */
         if ((phys_addr & 0x41) != 0x01)
             return 0;
