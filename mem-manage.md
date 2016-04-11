@@ -60,6 +60,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
 若两个进程的可执行文件相同`(*p)->executable == current->executable`,则可以尝试共享内存页,share_page过程如下：  
 
     // address是进程中的逻辑地址，共享成功返回1失败返回0
+    <font color=red>内容</font>
     static int share_page(unsigned long address)
     {
         struct task_struct ** p;
