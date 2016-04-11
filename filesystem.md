@@ -13,4 +13,11 @@ _**注意：**_盘块(磁盘块)和逻辑块不是一个概念，一个逻辑块
 inode中的i_mode字段表示文件的类型，权限等属性：  
 ![i-mode图解](./img/linux011-i-mode.png)
 ### 目录结构
-对一个目录来说，它没有实际的数据，所以它的数据块中存放的是它里面的所有文件名对应的目录项。
+对一个目录来说，它没有实际的数据，所以它的数据块中存放的是它里面的所有文件名对应的目录项。目录项结构如下:  
+
+    // include/linux/fs.h
+    #define NAME_LEN 14
+    struct dir_entry {
+        unsigned short inode;
+        char name[NAME_LEN];
+    };
