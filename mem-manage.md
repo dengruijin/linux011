@@ -99,8 +99,8 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
     /* is there a page-directory at from? */
         // 得到进程p的address对应的PDE内容
         from = *(unsigned long *) from_page;
-        if (!(from & 1))
-            return 0;
+        if (!(from & 1)) 
+            return 0; // 存在位=0，无法共享
         from &= 0xfffff000;
         from_page = from + ((address>>10) & 0xffc);
         phys_addr = *(unsigned long *) from_page;
