@@ -43,3 +43,8 @@ inode中的i_mode字段表示文件的类型，权限等属性：
 * 根据文件名找i节点
     * namei()
 * 超级块处理
+    * get_super()
+    * put_super()
+    * free_super()
+    * sys_mount()
+    * 
