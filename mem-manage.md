@@ -44,6 +44,10 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
 页异常处理程序根据存在位(P)来判断是缺页异常还是写保护异常，然后调用相应的处理程序：
  * 缺页异常处理：
        void do_no_page(unsigned long error_code,unsigned long address)
+   缺页异常处理的方法是：
+   * 首先判断是不是由于程序执行文件没有载入内存引起的，
+   * 若不是则get_empty_page申请并映射一页内存即可返回，若是，则进入下一步。
+   * 
  * 写保护异常处理
        void do_wp_page(unsigned long error_code,unsigned long address)
 ### *进程间共享内存
