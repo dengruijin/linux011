@@ -112,7 +112,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
         if (phys_addr >= HIGH_MEMORY || phys_addr < LOW_MEM)
             return 0;
         to = *(unsigned long *) to_page; // 当前进程PDE内容
-        if (!(to & 1)) {
+        if (!(to & 1)) { // 若存在位=0则要申请一页存放页表
             if ((to = get_free_page()))
                 *(unsigned long *) to_page = to | 7;
             else
