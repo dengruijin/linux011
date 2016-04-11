@@ -60,4 +60,6 @@ inode中的i_mode字段表示文件的类型，权限等属性：
  open.c主要用于文件的打开创建关闭，属性修改等  
  exec.c主要用于do_execve()  
  fcntl.c主要实现了fcntl()和dup(),dup2()  
+ ioctl.c主要实现了ioctl().主要调用tty_ioctl()
+ stat.c实现文件属性的获取stat()和fstat()  
  
