@@ -82,7 +82,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
         return 0;
     }
     // address是当前进程中的逻辑地址,p指向的是提供共享页的进程
-    // 
+    // 共享成功返回1失败返回0
     static int try_to_share(unsigned long address, struct task_struct * p)
     {
         unsigned long from;
