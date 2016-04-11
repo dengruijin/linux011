@@ -92,7 +92,9 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
         unsigned long phys_addr;
 
         from_page = to_page = ((address>>20) & 0xffc);
+        // 得到当前进程address对应的页目录地址
         from_page += ((p->start_code>>20) & 0xffc);
+        // 得到进程p的address对应的页目录地址
         to_page += ((current->start_code>>20) & 0xffc);
     /* is there a page-directory at from? */
         from = *(unsigned long *) from_page;
