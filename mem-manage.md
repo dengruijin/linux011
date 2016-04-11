@@ -56,8 +56,30 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
     * 申请一页内存，若引起异常的地址大于1MB(说明引用次数>1)，将引用次数减1
     * 将新申请的页属性值设为7，映射给出错的线性地址，并刷新TLB，然后将原来页的内容复制到新页中，返回.
  
-### *进程间共享内存
-若两个进程的可执行文件相同`(*p)->executable == current->executable`,则可以尝试共享内存页
+### *进程间共享内存share_page
+若两个进程的可执行文件相同`(*p)->executable == current->executable`,则可以尝试共享内存页,share_page过程如下：  
+
+    // address是进程中的逻辑地址
+    static int share_page(unsigned long address)
+    {
+        struct task_struct ** p;
+
+        if (!current->executable)
+            return 0;
+        if (current->executable->i_count < 2)
+            return 0;
+        for (p = &LAST_TASK ; p > &FIRST_TASK ; --p) {
+            if (!*p)
+                continue;
+            if (current == *p)
+                continue;
+            if ((*p)->executable != current->executable)
+                continue;
+            if (try_to_share(address,*p))
+                return 1;
+        }
+        return 0;
+    }
 
       // address是进程中的逻辑地址
       static int try_to_share(unsigned long address, struct task_struct * p)
