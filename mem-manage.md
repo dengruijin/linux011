@@ -35,7 +35,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
       void get_empty_page(unsigned long address)
       //该函数的实现是对get_free_page和put_page的封装。
 ### *缺页&写保护异常处理
-当CPU进行线性地址到物理地址的转换如果发现对应页目录项或页表项的**存在标志位为0**或者当前进程**没有权限访问该页**，就会发生页异常中断。
+当CPU进行线性地址到物理地址的转换如果发现对应页目录项或页表项的**存在标志位为0**或者当前进程**没有权限访问该页**，就会发生页异常中断。发生页异常时CPU会将错误码压入栈中并将引起异常的线性地址放入CR2寄存器
 
 ### *进程间共享内存
       static int try_to_share(unsigned long address, struct task_struct * p)
