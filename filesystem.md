@@ -30,3 +30,8 @@ inode中的i_mode字段表示文件的类型，权限等属性：
 * bread_page()
 ### 文件系统底层函数
 * i节点位图和逻辑块位图操作函数 bitmap.c
+    * free_inode()
+    * new_inode()
+    * free_block()
+    * new_block()
+    * 
