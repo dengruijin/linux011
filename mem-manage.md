@@ -80,6 +80,51 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
         }
         return 0;
     }
+    // address是当前进程中的逻辑地址,p指向的是提供共享页的进程
+    static int try_to_share(unsigned long address, struct task_struct * p)
+    {
+        unsigned long from;
+        unsigned long to;
+        unsigned long from_page;
+        unsigned long to_page;
+        unsigned long phys_addr;
+
+        from_page = to_page = ((address>>20) & 0xffc);
+        from_page += ((p->start_code>>20) & 0xffc);
+        to_page += ((current->start_code>>20) & 0xffc);
+    /* is there a page-directory at from? */
+        from = *(unsigned long *) from_page;
+        if (!(from & 1))
+            return 0;
+        from &= 0xfffff000;
+        from_page = from + ((address>>10) & 0xffc);
+        phys_addr = *(unsigned long *) from_page;
+    /* is the page clean and present? */
+        if ((phys_addr & 0x41) != 0x01)
+            return 0;
+        phys_addr &= 0xfffff000;
+        if (phys_addr >= HIGH_MEMORY || phys_addr < LOW_MEM)
+            return 0;
+        to = *(unsigned long *) to_page;
+        if (!(to & 1)) {
+            if ((to = get_free_page()))
+                *(unsigned long *) to_page = to | 7;
+            else
+                oom();
+        }
+        to &= 0xfffff000;
+        to_page = to + ((address>>10) & 0xffc);
+        if (1 & *(unsigned long *) to_page)
+            panic("try_to_share: to_page already exists");
+    /* share them: write-protect */
+        *(unsigned long *) from_page &= ~2;
+        *(unsigned long *) to_page = *(unsigned long *) from_page;
+        invalidate();
+        phys_addr -= LOW_MEM;
+        phys_addr >>= 12;
+        mem_map[phys_addr]++;
+        return 1;
+    }
 
       // address是进程中的逻辑地址
       static int try_to_share(unsigned long address, struct task_struct * p)
