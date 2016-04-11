@@ -133,10 +133,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
         return 1; // 共享成功，返回1
     }
 
-      // address是进程中的逻辑地址
-      static int try_to_share(unsigned long address, struct task_struct * p)
-      // address是进程中的逻辑地址
-      static int share_page(unsigned long address)
+     
 
 
 ---
@@ -158,3 +155,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
     int free_page_tables(unsigned long from,unsigned long size)
     int copy_page_tables(unsigned long from,unsigned long to,long size)
     unsigned long put_page(unsigned long page,unsigned long address)
+    // address是进程中的逻辑地址
+    static int try_to_share(unsigned long address, struct task_struct * p)
+    // address是进程中的逻辑地址
+    static int share_page(unsigned long address)
