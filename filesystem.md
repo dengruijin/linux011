@@ -18,6 +18,6 @@ inode中的i_mode字段表示文件的类型，权限等属性：
     // include/linux/fs.h
     #define NAME_LEN 14
     struct dir_entry {
-        unsigned short inode;
+        unsigned short inode; // i节点号
         char name[NAME_LEN];
     };
