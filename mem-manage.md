@@ -118,7 +118,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
             else
                 oom();
         }
-        to &= 0xfffff000;
+        to &= 0xfffff000; // 页表地址
         to_page = to + ((address>>10) & 0xffc);
         if (1 & *(unsigned long *) to_page)
             panic("try_to_share: to_page already exists");
