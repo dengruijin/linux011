@@ -11,10 +11,10 @@ linux0.11默认支持的最大物理内存是16MB，被划分成五大块：
 * ROM BIOS
 * RAMDISK(可选)
 * 主内存区， 这一块就是内存管理模块主要的用武之地了。  
-![物理内存布局](file:///home/deng/pictures/linux0.11-mem-layout.png)
+![物理内存布局](file://./img/linux0.11-mem-layout.png)
 
 ### *线性地址空间布局
-![线性地址空间](file:///home/deng/pictures/liner-addr-layout.png)
+![线性地址空间](./img/liner-addr-layout.png)
 ### *内存的申请与释放
 mem_map[]字节数组记录了主内存区中每一个物理页的使用情况，若mem_map[i]=0说明第i页是空闲的。
 * __申请内存页__：`get_free_page(void)`  
