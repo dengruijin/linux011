@@ -123,7 +123,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
         if (1 & *(unsigned long *) to_page) // PTE存在位=1，出错
             panic("try_to_share: to_page already exists");
     /* share them: write-protect */
-        *(unsigned long *) from_page &= ~2;
+        *(unsigned long *) from_page &= ~2; // 要共享了，设该页为只读
         *(unsigned long *) to_page = *(unsigned long *) from_page;
         invalidate();
         phys_addr -= LOW_MEM;
