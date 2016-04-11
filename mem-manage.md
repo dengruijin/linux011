@@ -75,12 +75,14 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
                 continue;
             if ((*p)->executable != current->executable)
                 continue;
+            // 到此说明可以试一试
             if (try_to_share(address,*p))
                 return 1;
         }
         return 0;
     }
     // address是当前进程中的逻辑地址,p指向的是提供共享页的进程
+    // 
     static int try_to_share(unsigned long address, struct task_struct * p)
     {
         unsigned long from;
