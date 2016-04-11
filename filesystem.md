@@ -52,4 +52,4 @@ inode中的i_mode字段表示文件的类型，权限等属性：
 
  ![fs底层函数关系](./img/fs-low-lev-funs.png)
  
- 
+ ### 文件数据的访问
