@@ -21,3 +21,4 @@ inode中的i_mode字段表示文件的类型，权限等属性：
         unsigned short inode; // i节点号
         char name[NAME_LEN];
     };
+若要根据文件名来得到i节点，就得通过目录项来查找。
