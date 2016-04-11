@@ -120,7 +120,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
         }
         to &= 0xfffff000; // 当前进程address对应的页表地址
         to_page = to + ((address>>10) & 0xffc); // PTE指针
-        if (1 & *(unsigned long *) to_page)
+        if (1 & *(unsigned long *) to_page) // PTE存在位=1，出错
             panic("try_to_share: to_page already exists");
     /* share them: write-protect */
         *(unsigned long *) from_page &= ~2;
