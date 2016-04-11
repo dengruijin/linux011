@@ -61,6 +61,7 @@ mem_map[]字节数组记录了主内存区中每一个物理页的使用情况�
 
       // address是进程中的逻辑地址
       static int try_to_share(unsigned long address, struct task_struct * p)
+      // address是进程中的逻辑地址
       static int share_page(unsigned long address)
 
 
