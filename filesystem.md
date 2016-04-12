@@ -53,15 +53,15 @@ inode中的i_mode字段表示文件的类型，权限等属性：
       struct super_block super_block[NR_SUPER];
       /* this is initialized in init/main.c */
       int ROOT_DEV = 0;
-    * get_super()   
+    * `get_super()`   
     在超级块数组中查找指定设备的超级块结构，找到则返回指针否则返回NULL
-    * put_super()  
+    * `put_super()`  
     释放指定设备的超级块:释放设备使用的超级块数组项，并释放该设备i节点位图和逻辑块位图所占用的高速缓冲块,最后调用free_super()。
-    * read_super() 
+    * `read_super()` 
     从设备中读取超级块到缓冲块中，再复制到超级块数组.同时读取i节点位图和逻辑块位图。
-    * free_super()
-    * sys_mount() 
-    * mount_root() 
+    * `free_super()`
+    * `sys_mount()` 
+    * `mount_root()` 
 
  ![fs底层函数关系](./img/fs-low-lev-funs.png)
  
