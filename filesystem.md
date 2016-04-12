@@ -49,6 +49,7 @@ inode中的i_mode字段表示文件的类型，权限等属性：
     * namei()
 * **super.c** 超级块处理  
 定义全局变量超级块数组和根设备号：
+      // NR_SUPER=8 见fs.h
       struct super_block super_block[NR_SUPER];
       /* this is initialized in init/main.c */
       int ROOT_DEV = 0;
