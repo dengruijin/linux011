@@ -60,6 +60,7 @@ inode中的i_mode字段表示文件的类型，权限等属性：
     * `read_super()` 
     从设备中读取超级块到缓冲块中，再复制到超级块数组.同时读取i节点位图和逻辑块位图。
     * `sys_umount()`
+    卸载指定设备名的设备
     * `free_super()`
     * `sys_mount()` 
     * `mount_root()` 
