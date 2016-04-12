@@ -58,6 +58,7 @@ inode中的i_mode字段表示文件的类型，权限等属性：
     * put_super()  
     释放指定设备的超级块:释放设备使用的超级块数组项，并释放该设备i节点位图和逻辑块位图所占用的高速缓冲块,最后调用free_super()。
     * read_super() 
+    从设备中读取超级块到缓冲块中，再复制到超级块数组.
     * free_super()
     * sys_mount() 
     * mount_root() 
