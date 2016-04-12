@@ -53,7 +53,7 @@ inode中的i_mode字段表示文件的类型，权限等属性：
       struct super_block super_block[NR_SUPER];
       /* this is initialized in init/main.c */
       int ROOT_DEV = 0;
-    * get_super()
+    * get_super() 在超级块数组中查找指定设备的超级块结构
     * put_super()
     * free_super()
     * sys_mount() 
