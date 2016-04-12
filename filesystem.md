@@ -45,9 +45,9 @@ inode中的i_mode字段表示文件的类型，权限等属性：
     * iput()
     * bmap()
     * sync_inodes()
-* 根据文件名找i节点
+* 根据文件名找i节点 namei.c
     * namei()
-* 超级块处理
+* 超级块处理  super.c
     * get_super()
     * put_super()
     * free_super()
