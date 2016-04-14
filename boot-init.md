@@ -152,7 +152,8 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
     }
 #### blk_dev_init
 #### chr_dev_init
-该函数没有做任何事：
+该函数没有做任何事：(tty_io.c) 
+
       void chr_dev_init(void)
       {
       }
