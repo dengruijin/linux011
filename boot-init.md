@@ -158,8 +158,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
       {
       }
 #### tty_init, (tty_io.c) 
-    void tty_init(void)
-    {
+    void tty_init(void){
         rs_init();
         con_init();
     }
