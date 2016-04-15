@@ -17,3 +17,6 @@ losetup -o 512 /dev/loop1 hdc-011.img #512是分区开始处字节偏移
 mount -t minix /dev/loop1  /mnt
 
 diff -r linux linux-mdf>dif.out
+
+### Bochs安装
+http://nchc.dl.sourceforge.net/project/bochs/bochs/2.4.5/bochs-2.4.5.tar.gz
