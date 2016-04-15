@@ -7,4 +7,10 @@ dd if=/dev/zero of=floppy.img bs=512 count=2880
 sudo mount -t minix rootimage-0.12-20040306 /mnt -o loop
 
 ### 查看硬盘映像中的内容
+查看分区信息
+losetup /dev/loop1  hdc-011.img
+fdisk /dev/loop1
+losetup -d /dev/loop1
+
+挂载分区
 
