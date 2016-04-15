@@ -2,4 +2,9 @@
 
 ### 制作软盘映像文件
 dd if=/dev/zero of=floppy.img bs=512 count=2880
+
+### 查看软盘影像中的内容
 sudo mount -t minix rootimage-0.12-20040306 /mnt -o loop
+
+### 查看硬盘映像中的内容
+
