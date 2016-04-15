@@ -25,5 +25,7 @@ http://nchc.dl.sourceforge.net/project/bochs/bochs/2.4.5/bochs-2.4.5.tar.gz
       sudo tar zxvf bochs-2.4.5.tar.gz
       cd bochs-2.4.5/
       sudo apt-get install build-essential
+      sudo apt-get install xorg-dev  
       sudo ./configure --enable-debugger --enable-disasm  
+       
       
