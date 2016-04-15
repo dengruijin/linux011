@@ -20,7 +20,10 @@ diff -r linux linux-mdf>dif.out
 
 ### Bochs安装
 下载源码包：
-http://nchc.dl.sourceforge.net/project/bochs/bochs/2.4.5/bochs-2.4.5.tar.gz
+http://nchc.dl.sourceforge.net/project/bochs/bochs/2.4.5/bochs-2.4.5.tar.gz  
 
-
-sudo apt-get install build-essential
+      sudo tar zxvf bochs-2.4.5.tar.gz
+      cd bochs-2.4.5/
+      sudo apt-get install build-essential
+      sudo ./configure --enable-debugger --enable-disasm  
+      
