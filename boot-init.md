@@ -173,7 +173,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
     }
 #### time_init
 #### sched_init
-  
+准备task0的运行环境，设置时钟中断。  
  * 在GDT中设置task0的tss和ldt描述符项
         set_tss_desc(gdt+FIRST_TSS_ENTRY,&(init_task.task.tss));
         set_ldt_desc(gdt+FIRST_LDT_ENTRY,&(init_task.task.ldt));
