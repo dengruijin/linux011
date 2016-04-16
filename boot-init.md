@@ -221,9 +221,9 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 进入用户态，开始运行task0(进程0)    
     
     #define move_to_user_mode() \
-    __asm__ ("movl %%esp,%%eax\n\t" \
-        "pushl $0x17\n\t" \
-        "pushl %%eax\n\t" \
+    __asm__ ("movl %%esp,%%eax\n\t" \  //保存esp到eax
+        "pushl $0x17\n\t" \            // 压入ss
+        "pushl %%eax\n\t" \            // 压入保存在eax中的esp
         "pushfl\n\t" \
         "pushl $0x0f\n\t" \
         "pushl $1f\n\t" \
