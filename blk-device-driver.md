@@ -44,6 +44,7 @@ linux-0.11用`struct request`来封装一个块设备读写请求,并用一个�
     struct request request[NR_REQUEST];
 * __封装函数__  
 
+      static void make_request(int major,int rw, struct buffer_head * bh)
   
 
 ### 块设备的请求队列
