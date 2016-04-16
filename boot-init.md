@@ -229,7 +229,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         "pushl $1f\n\t" \          // 压入task0的eip,即下面的标号1处
         "iret\n" \                 // 开始进入task0
         "1:\tmovl $0x17,%%eax\n\t" \
-        "movw %%ax,%%ds\n\t" \
+        "movw %%ax,%%ds\n\t" \     // 初始化段寄存器
         "movw %%ax,%%es\n\t" \
         "movw %%ax,%%fs\n\t" \
         "movw %%ax,%%gs" \
