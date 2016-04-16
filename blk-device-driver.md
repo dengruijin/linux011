@@ -46,7 +46,10 @@ linux-0.11用`struct request`来封装一个块设备读写请求:
 并将其加入到request链表中
 
 ### 块设备的请求队列
+linux-0.11用主设备号为索引的块设备表:  
 
+    struct blk_dev_struct blk_dev[NR_BLK_DEV] 
+块设备结构体:
     struct blk_dev_struct {
         void (*request_fn)(void);
         struct request * current_request;
