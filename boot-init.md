@@ -219,7 +219,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 #### sti 允许CPU接收中断
 #### move_to_user_mode
     
-    // system.h 进入用户态
+    // system.h 进入用户态，开始运行task0(进程0)
     #define move_to_user_mode() \
     __asm__ ("movl %%esp,%%eax\n\t" \
         "pushl $0x17\n\t" \
