@@ -209,6 +209,13 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         outb(inb_p(0xA1)&0xbf,0xA1); // 使能硬盘中断
     }
 #### floppy_init  
+软盘初始化,设置块设备表中软盘项的request_fn，使能软盘中断：    
+    
+    void floppy_init(void){
+        blk_dev[MAJOR_NR].request_fn = DEVICE_REQUEST;
+        set_trap_gate(0x26,&floppy_interrupt);
+        outb(inb_p(0x21)&~0x40,0x21);
+    }
 #### sti
 #### move_to_user_mode
 #### fork
