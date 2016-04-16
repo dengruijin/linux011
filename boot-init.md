@@ -194,6 +194,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
     void hd_init(void) {
         // 设置块设备表中硬盘的request_fn为do_hd_request()
         blk_dev[MAJOR_NR].request_fn = DEVICE_REQUEST;
+        // 设置硬盘中断入口
         set_intr_gate(0x2E,&hd_interrupt);
         outb_p(inb_p(0x21)&0xfb,0x21);
         outb(inb_p(0xA1)&0xbf,0xA1);
