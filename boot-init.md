@@ -189,7 +189,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
  * 设置系统调用中断处理程序为system_call
 
 
-#### buffer_init
+#### buffer_init 高速缓冲初始化
 #### hd_init 硬盘初始化  
     void hd_init(void) {
         // 设置块设备表中硬盘的request_fn为do_hd_request()
