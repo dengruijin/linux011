@@ -135,12 +135,14 @@ request_fn的复制分别在`hd_init()`、`floppy_init()`和`rd_init()`中。
 * 接着根据cmd类型来调用hd_out(),注意write_intr和read_intr  
       if (CURRENT->cmd == WRITE) {
               hd_out(dev,nsect,sec,head,cyl,WIN_WRITE,&write_intr);
+              // 循环查询硬盘状态标志，是否可以写数据
               for(i=0 ; i<3000 && !(r=inb_p(HD_STATUS)&DRQ_STAT) ; i++)
                   /* nothing */ ;
-              if (!r) {
+              if (!r) { // 循环结束还没有置位，写请求失败
                   bad_rw_intr();
                   goto repeat;
               }
+              // 到这里说明硬盘状态正常，可以给他写数据了
               port_write(HD_DATA,CURRENT->buffer,256);
           } else if (CURRENT->cmd == READ) {
               hd_out(dev,nsect,sec,head,cyl,WIN_READ,&read_intr);
