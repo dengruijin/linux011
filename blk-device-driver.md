@@ -77,7 +77,7 @@ linux-0.11用`struct request`来封装一个块设备读写请求,并用一个�
           add_request(major+blk_dev,req);
       }
       
-该函数从全局request数组中取得一个空闲的项
+该函数从全局request数组中取得一个空闲的项,然后根据参数填充request结构，再将其加入请求链表
   
 
 ### 块设备的请求队列
