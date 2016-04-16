@@ -47,6 +47,62 @@ linux-0.11用`struct request`来封装一个块设备读写请求,并用一个�
 * __封装函数__  
 
       static void make_request(int major,int rw, struct buffer_head * bh)
+      {
+          struct request * req;
+          int rw_ahead;
+
+      /* WRITEA/READA is special case - it is not really needed, so if the */
+      /* buffer is locked, we just forget about it, else it's a normal read */
+          if ((rw_ahead = (rw == READA || rw == WRITEA))) {
+              if (bh->b_lock)
+                  return;
+              if (rw == READA)
+                  rw = READ;
+              else
+                  rw = WRITE;
+          }
+          if (rw!=READ && rw!=WRITE)
+              panic("Bad block dev command, must be R/W/RA/WA");
+          lock_buffer(bh);
+          if ((rw == WRITE && !bh->b_dirt) || (rw == READ && bh->b_uptodate)) {
+              unlock_buffer(bh);
+              return;
+          }
+      repeat:
+      /* we don't allow the write-requests to fill up the queue completely:
+       * we want some room for reads: they take precedence. The last third
+       * of the requests are only for reads.
+       */
+          if (rw == READ)
+              req = request+NR_REQUEST;
+          else
+              req = request+((NR_REQUEST*2)/3);
+      /* find an empty request */
+          while (--req >= request)
+              if (req->dev<0)
+                  break;
+      /* if none found, sleep on new requests: check for rw_ahead */
+          if (req < request) {
+              if (rw_ahead) {
+                  unlock_buffer(bh);
+                  return;
+              }
+              sleep_on(&wait_for_request);
+              goto repeat;
+          }
+      /* fill up the request-info, and add it to the queue */
+          req->dev = bh->b_dev;
+          req->cmd = rw;
+          req->errors=0;
+          req->sector = bh->b_blocknr<<1;
+          req->nr_sectors = 2;
+          req->buffer = bh->b_data;
+          req->waiting = NULL;
+          req->bh = bh;
+          req->next = NULL;
+          add_request(major+blk_dev,req);
+      }
+      
 该函数从全局request数组中取得一个空闲的项
   
 
