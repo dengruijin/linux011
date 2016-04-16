@@ -227,7 +227,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         "pushfl\n\t" \                 // 压入eflags
         "pushl $0x0f\n\t" \            // 压入task0的cs
         "pushl $1f\n\t" \          // 压入task0的eip,即下面的标号1处
-        "iret\n" \                 // 
+        "iret\n" \                 // 开始进入task0
         "1:\tmovl $0x17,%%eax\n\t" \
         "movw %%ax,%%ds\n\t" \
         "movw %%ax,%%es\n\t" \
