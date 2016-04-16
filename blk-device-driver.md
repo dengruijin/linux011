@@ -38,7 +38,7 @@ linux用struct request来封装一个块设备读写请求:
         struct request * next;
     };
 
-并用一个全局的request数组来存放request:  
+全局的request数组来存放request:  
 
       //ll_rw_block.c
       struct request request[NR_REQUEST];
