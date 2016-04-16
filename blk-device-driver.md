@@ -131,7 +131,7 @@ request_fn的复制分别在`hd_init()`、`floppy_init()`和`rd_init()`中。
 
 
 ![块设备读写](./img/blk-device-rw.png)
-读硬盘过程：
+__读硬盘过程：__
 ![read-hd](./img/read-blk-device.png)
-写硬盘过程:
-
+__写硬盘过程:__
+![write-hd](./img/write-blk-device.png)
