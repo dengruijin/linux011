@@ -127,5 +127,5 @@ request_fn的复制分别在`hd_init()`、`floppy_init()`和`rd_init()`中。
 
 ### 请求的处理过程
 从add_request可以看出当设备的current_request为空（即设备空闲），则立即调用`dev->request_fn`进行请求的处理。
-
+内核操作(读写)块设备通过中断来实现，内核向硬盘的控制器发出读/写指令，然后返回。
 
