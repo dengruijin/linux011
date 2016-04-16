@@ -9,7 +9,9 @@
     `#define WRITE 1`  
     `#define READA 2`  	
     `#define WRITEA 3`  
->bh 高速缓冲块指针
+>bh 高速缓冲块指针  
+
+* __函数体：__
 
       void ll_rw_block(int rw, struct buffer_head * bh)
       {
