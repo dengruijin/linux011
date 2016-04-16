@@ -26,6 +26,7 @@
 ### 读写请求的封装
 linux-0.11用`struct request`来封装一个块设备读写请求,并用一个全局数组来存放所有的request:  
 
+    // blk.h
     struct request {
         int dev;		/*设备号 -1 if no request */
         int cmd;		/* READ or WRITE */
