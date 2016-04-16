@@ -24,6 +24,7 @@
       }
 当内核需要读写块设f备时传入适当参数调用ll_rw_block()即可。如bread中的调用：`ll_rw_block(READ,bh);`。在ll_rw_block中即调用make_request来根据参数把读写请求封装成request结构。
 ### 读写请求的封装
+* __请求结构体__  
 linux-0.11用`struct request`来封装一个块设备读写请求,并用一个全局数组来存放所有的request:  
 
     // blk.h
@@ -41,6 +42,7 @@ linux-0.11用`struct request`来封装一个块设备读写请求,并用一个�
     // ll_rw_block.c  NR_REQUEST=32 
     // 全局的request数组来存放request:
     struct request request[NR_REQUEST];
+* __封装函数__  
 
   
 
@@ -54,4 +56,5 @@ linux-0.11用主设备号为索引的块设备表来索引每一种设备的请�
         void (*request_fn)(void);
         struct request * current_request;
     };
-`current_request`指针和request中的`next`共同为一种块设备构成了请求链表，current_request指向该链表的头。
+`current_request`指针和request中的`next`共同为一种块设备构成了请求链表，current_request指向该链表的头。  
+request_fn的复制分别在`hd_init()`、`floppy_init()`和`rd_init()`中
