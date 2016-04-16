@@ -192,20 +192,20 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 #### buffer_init
 #### hd_init
 #### floppy_init
-* sti
-* move_to_user_mode
-* fork
-* init
+#### sti
+#### move_to_user_mode
+#### fork
+#### init
 该函数首先调用setup系统调用,对应的处理函数sys_setup()位于hd.c文件。  
 sys_setup()做了如下工作：  
-  > 1.用硬盘参数信息填充`struct hd_i_struct hd_info[]`数组,包括磁头数,每磁道扇区数,柱面数等  
-  > 2.根据`hd_info[1].cyl`是否为0判断是否只有一个硬盘还是有两个硬盘(最多支持两个硬盘),给硬盘数NR_HD赋值(1或2)  
-  > 3.设置硬盘分区结构数组hd[],(只填充hd[0]和hd[5])  
-  > 4.根据CMOS信息真正确定硬盘个数(0或1或2)  
-  > 5.读取硬盘第一扇区确定分区结构，填充hd[]其他项  
-  > 6.打印"Partition table ok"(如果有硬盘的话)  
-  > 7.rd_load()尝试创建并加载虚拟磁盘  
-  > 8.mount_root()安装根文件系统
+  * 1.用硬盘参数信息填充`struct hd_i_struct hd_info[]`数组,包括磁头数,每磁道扇区数,柱面数等  
+  * 2.根据`hd_info[1].cyl`是否为0判断是否只有一个硬盘还是有两个硬盘(最多支持两个硬盘),给硬盘数NR_HD赋值(1或2)  
+  * 3.设置硬盘分区结构数组hd[],(只填充hd[0]和hd[5])  
+  * 4.根据CMOS信息真正确定硬盘个数(0或1或2)  
+  * 5.读取硬盘第一扇区确定分区结构，填充hd[]其他项  
+  * 6.打印"Partition table ok"(如果有硬盘的话)  
+  * 7.rd_load()尝试创建并加载虚拟磁盘  
+  * 8.mount_root()安装根文件系统
 
       
 
