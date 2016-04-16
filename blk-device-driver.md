@@ -40,7 +40,7 @@ linux-0.11用`struct request`来封装一个块设备读写请求:
 
 全局的request数组来存放request:  
 
-      //ll_rw_block.c
+      //ll_rw_block.c  NR_REQUEST=32
       struct request request[NR_REQUEST];
         
 并将其加入到request链表中
