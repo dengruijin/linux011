@@ -48,8 +48,10 @@ linux-0.11用`struct request`来封装一个块设备读写请求:
 linux-0.11用主设备号为索引的块设备表来索引每一种设备的请求操作函数`request_fn`和当前正在处理的请求`current_request`:  
 
     struct blk_dev_struct blk_dev[NR_BLK_DEV] 
-块设备结构体:
+块设备结构体:  
+
     struct blk_dev_struct {
         void (*request_fn)(void);
         struct request * current_request;
     };
+`current_request`指针和request中的`next`共同为一种块设备构成了请求链表，current_request指向该链表的头。
