@@ -216,7 +216,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         set_trap_gate(0x26,&floppy_interrupt);
         outb(inb_p(0x21)&~0x40,0x21);
     }
-#### sti
+#### sti 允许CPU接收中断
 #### move_to_user_mode
 #### fork
 #### init
