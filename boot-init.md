@@ -205,7 +205,7 @@ sys_setup()做了如下工作：
   > 5.读取硬盘第一扇区确定分区结构，填充hd[]其他项
   > 6.打印"Partition table ok"(如果有硬盘的话)
   > 7.rd_load()尝试创建并加载虚拟磁盘
-  > 8.mount_root()
+  > 8.mount_root()安装根文件系统
 
       
 
