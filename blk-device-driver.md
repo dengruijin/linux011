@@ -50,7 +50,7 @@ linux-0.11用`struct request`来封装一个块设备读写请求,并用一个�
 ### 块设备的请求队列
 linux-0.11用主设备号为索引的块设备表来索引每一种设备的请求操作函数`request_fn`和当前正在处理的请求`current_request`:  
 
-    // ll_rw_block.c  NR_BLK_DEV=7
+    // ll_rw_block.c  32, NR_BLK_DEV=7
     struct blk_dev_struct blk_dev[NR_BLK_DEV]
     // blk.h 45. 块设备结构体: 
     struct blk_dev_struct {
