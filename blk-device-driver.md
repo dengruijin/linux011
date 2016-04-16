@@ -25,6 +25,7 @@
           make_request(major,rw,bh);
       }
 当内核需要读写块设f备时传入适当参数调用ll_rw_block()即可。如bread中的调用：`ll_rw_block(READ,bh);`。在ll_rw_block中即调用make_request来根据参数把读写请求封装成request结构。
+![ll-rw-block](./img/ll-rw-blk.png)
 ### 读写请求的封装
 * __请求结构体__  
 linux-0.11用`struct request`来封装一个块设备读写请求,并用一个全局数组来存放所有的request:  
