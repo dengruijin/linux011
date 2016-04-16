@@ -166,10 +166,11 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
       void chr_dev_init(void)
       {
       }
-#### tty_init, (tty_io.c) 
+#### tty_init 
+    // tty_io.c
     void tty_init(void){
-        rs_init(); // serial.c
-        con_init(); // console.c
+        rs_init(); // 初始化串口终端 serial.c 
+        con_init(); // 初始化控制台终端 console.c
     }
 #### time_init
 #### sched_init
