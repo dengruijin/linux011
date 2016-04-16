@@ -132,7 +132,7 @@ request_fn的复制分别在`hd_init()`、`floppy_init()`和`rd_init()`中。
 
 下面看看do_hd_request()都做了些什么:
 * 首先检查请求项的合法性并检查硬盘状态
-* 接着根据cmd类型来调用hd_out()  
+* 接着根据cmd类型来调用hd_out(),注意write_intr和read_intr  
       if (CURRENT->cmd == WRITE) {
               hd_out(dev,nsect,sec,head,cyl,WIN_WRITE,&write_intr);
               for(i=0 ; i<3000 && !(r=inb_p(HD_STATUS)&DRQ_STAT) ; i++)
