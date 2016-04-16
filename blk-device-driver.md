@@ -44,3 +44,10 @@ linux-0.11用`struct request`来封装一个块设备读写请求:
       struct request request[NR_REQUEST];
         
 并将其加入到request链表中
+
+### 块设备的请求队列
+
+    struct blk_dev_struct {
+        void (*request_fn)(void);
+        struct request * current_request;
+    };
