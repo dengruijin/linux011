@@ -2,7 +2,9 @@
 
 ### 块设备读写
 块设备的读写接口是`ll_rw_block()`
-
+输入参数：
+>rw 表示读写命令
+>bh 高速缓冲块指针
       void ll_rw_block(int rw, struct buffer_head * bh)
       {
           unsigned int major;
