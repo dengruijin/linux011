@@ -16,7 +16,7 @@
           unsigned int major;
 
           if ((major=MAJOR(bh->b_dev)) >= NR_BLK_DEV ||
-          !(blk_dev[major].request_fn)) {
+          !(blk_dev[major].request_fn)) { // request_fn即do_XX_request函数指针
               printk("Trying to read nonexistent block-device\n\r");
               return;
           }
