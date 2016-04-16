@@ -35,7 +35,7 @@ linux-0.11用`struct request`来封装一个块设备读写请求:
         char * buffer;
         struct task_struct * waiting;
         struct buffer_head * bh;
-        struct request * next;
+        struct request * next; // 用来形成请求链表
     };
 
 全局的request数组来存放request:  
@@ -43,7 +43,6 @@ linux-0.11用`struct request`来封装一个块设备读写请求:
       //ll_rw_block.c  NR_REQUEST=32
       struct request request[NR_REQUEST];
         
-并将其加入到request链表中
 
 ### 块设备的请求队列
 linux-0.11用主设备号为索引的块设备表来索引每一种设备的请求操作函数`request_fn`和当前正在处理的请求`current_request`:  
