@@ -146,7 +146,8 @@ request_fn的复制分别在`hd_init()`、`floppy_init()`和`rd_init()`中。
 ### 请求的处理过程
 从add_request可以看出当设备的current_request为空（即设备空闲），则立即将current_request指向新加入的request,然后调用`dev->request_fn`进行请求的处理。
 * 如果是硬盘，request_fn=do_hd_request
-* 如果是软盘,request_fn=do_floppy_request  
+* 如果是软盘,request_fn=do_floppy_request
+* 如果是硬盘，request_fn=do_rd_request  
 
 下面看看do_hd_request()都做了些什么:
 * 首先检查请求项的合法性并检查硬盘状态
