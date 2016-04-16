@@ -199,7 +199,7 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         outb_p(inb_p(0x21)&0xfb,0x21);
         outb(inb_p(0xA1)&0xbf,0xA1); // 使能硬盘中断
     }
-#### floppy_init
+#### floppy_init  
 #### sti
 #### move_to_user_mode
 #### fork
