@@ -151,6 +151,15 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
         set_trap_gate(39,&parallel_interrupt);
     }
 #### blk_dev_init
+将请求项数组中所有项设为空闲:
+
+    void blk_dev_init(void) {
+        int i;
+        for (i=0 ; i<NR_REQUEST ; i++) {
+            request[i].dev = -1;
+            request[i].next = NULL;
+        }
+    }
 #### chr_dev_init
 该函数没有做任何事：(tty_io.c) 
 
