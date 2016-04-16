@@ -1,8 +1,8 @@
 # 块设备驱动
 ## 重要数据
-块设备表：
+块设备表每一中设备占一项：
     
-    // ll_rw_block.c 32
+    // ll_rw_block.c 32  NR_BLK_DEV=7
     struct blk_dev_struct blk_dev[NR_BLK_DEV] = {
         { NULL, NULL },		/* no_dev */
         { NULL, NULL },		/* dev mem */
@@ -14,7 +14,7 @@
     };
 request表：
     
-    // ll_rw_block.c 21
+    // ll_rw_block.c 21  NR_REQUEST=32
     struct request request[NR_REQUEST];
 
 ## 块设备读写
