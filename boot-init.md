@@ -224,10 +224,10 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
     __asm__ ("movl %%esp,%%eax\n\t" \  //保存esp到eax
         "pushl $0x17\n\t" \            // 压入ss
         "pushl %%eax\n\t" \            // 压入保存在eax中的esp
-        "pushfl\n\t" \
-        "pushl $0x0f\n\t" \
-        "pushl $1f\n\t" \
-        "iret\n" \
+        "pushfl\n\t" \                 // 压入eflags
+        "pushl $0x0f\n\t" \            // 压入task0的cs
+        "pushl $1f\n\t" \          // 压入task0的eip,即下面的标号1处
+        "iret\n" \                 // 
         "1:\tmovl $0x17,%%eax\n\t" \
         "movw %%ax,%%ds\n\t" \
         "movw %%ax,%%es\n\t" \
