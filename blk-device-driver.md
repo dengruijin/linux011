@@ -21,4 +21,4 @@
           }
           make_request(major,rw,bh);
       }
-当内核需要读写块设f备时传入适当参数调用ll_rw_block()即可。如bread中的调用：`ll_rw_block(READ,bh);`。在ll_rw_block中即调用make_request来构造一个request并将其加入到request链表中
+当内核需要读写块设f备时传入适当参数调用ll_rw_block()即可。如bread中的调用：`ll_rw_block(READ,bh);`。在ll_rw_block中即调用make_request来构造一个request.request是什么呢？并将其加入到request链表中
