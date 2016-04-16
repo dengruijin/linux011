@@ -64,7 +64,7 @@ linux-0.11用`struct request`来封装一个块设备读写请求,并用一个�
               // 获取失败则睡眠等待,唤醒后重新找
               goto repeat;
           }
-      /* fill up the request-info, and add it to the queue */
+          /* f填充request并将其加入链表 */
           req->dev = bh->b_dev;
           req->cmd = rw;
           req->errors=0;
