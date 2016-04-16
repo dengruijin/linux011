@@ -90,9 +90,11 @@ linux-0.11用主设备号为索引的块设备表来索引每一种设备的请�
       struct blk_dev_struct {
           void (*request_fn)(void);
           struct request * current_request;
-      };
+      };  
+request_fn的复制分别在`hd_init()`、`floppy_init()`和`rd_init()`中。
 `current_request`指针和request中的`next`共同为一种块设备构成了请求链表，current_request指向该链表的头。  
-request_fn的复制分别在`hd_init()`、`floppy_init()`和`rd_init()`中
+设备表和请求队列的关系如下图：
+![块设备请求队列](./img/blk-req-list.png)
 
 * __队列的增长__  
 新增请求时由make_request函数调用add_request来将封装好的request加入到指定块设备的请求队列(链表)中，下面是add_request()的实现：  
