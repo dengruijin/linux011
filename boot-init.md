@@ -198,7 +198,8 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 * init
 该函数首先调用setup系统调用,对应的处理函数sys_setup()位于hd.c文件。  
 sys_setup()做了如下工作：  
-  > fd
+  > 用硬盘参数信息填充`struct hd_i_struct hd_info[]`数组,包括磁头数,每磁道扇区数,柱面数等
+  > 
 
       
 
