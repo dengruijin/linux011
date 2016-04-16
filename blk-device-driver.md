@@ -3,8 +3,13 @@
 ### 块设备读写
 块设备的读写接口是`ll_rw_block()`
 输入参数：
->rw 表示读写命令
+>rw 表示读写命令 READ 或 WRITE  
+    >`#define READ 0`  
+    `#define WRITE 1`  
+    `#define READA 2`  	
+    `#define WRITEA 3`  
 >bh 高速缓冲块指针
+
       void ll_rw_block(int rw, struct buffer_head * bh)
       {
           unsigned int major;
