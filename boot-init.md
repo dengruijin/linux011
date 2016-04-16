@@ -218,6 +218,23 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
     }
 #### sti 允许CPU接收中断
 #### move_to_user_mode
+    
+    // system.h 进入用户态
+    #define move_to_user_mode() \
+    __asm__ ("movl %%esp,%%eax\n\t" \
+        "pushl $0x17\n\t" \
+        "pushl %%eax\n\t" \
+        "pushfl\n\t" \
+        "pushl $0x0f\n\t" \
+        "pushl $1f\n\t" \
+        "iret\n" \
+        "1:\tmovl $0x17,%%eax\n\t" \
+        "movw %%ax,%%ds\n\t" \
+        "movw %%ax,%%es\n\t" \
+        "movw %%ax,%%fs\n\t" \
+        "movw %%ax,%%gs" \
+        :::"ax")
+
 #### fork
 #### init
 该函数首先调用setup系统调用,对应的处理函数sys_setup()位于hd.c文件。  
