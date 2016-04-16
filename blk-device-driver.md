@@ -95,6 +95,30 @@ linux-0.11用主设备号为索引的块设备表来索引每一种设备的请�
 request_fn的复制分别在`hd_init()`、`floppy_init()`和`rd_init()`中
 
 * __队列的增长__  
+新增请求时由make_request函数调用add_request来将封装好的request加入到指定块设备的请求队列(链表)中，下面是add_request()的实现：  
 
+      static void add_request(struct blk_dev_struct * dev, struct request * req)
+      {
+          struct request * tmp;
+
+          req->next = NULL;
+          cli();
+          if (req->bh)
+              req->bh->b_dirt = 0;
+          if (!(tmp = dev->current_request)) {
+              dev->current_request = req;
+              sti();
+              (dev->request_fn)();
+              return;
+          }
+          for ( ; tmp->next ; tmp=tmp->next)
+              if ((IN_ORDER(tmp,req) || 
+                  !IN_ORDER(tmp,tmp->next)) &&
+                  IN_ORDER(req,tmp->next))
+                  break;
+          req->next=tmp->next;
+          tmp->next=req;
+          sti();
+      }
 
 
