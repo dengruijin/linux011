@@ -128,7 +128,8 @@ request_fn的复制分别在`hd_init()`、`floppy_init()`和`rd_init()`中。
 ### 请求的处理过程
 从add_request可以看出当设备的current_request为空（即设备空闲），则立即将current_request指向新加入的request,然后调用`dev->request_fn`进行请求的处理。
 * 如果是硬盘，request_fn=do_hd_request
-* 如果是软盘,request_fn=do_floppy_request
+* 如果是软盘,request_fn=do_floppy_request  
+
 内核操作(读写)块设备通过中断来实现，内核向硬盘的控制器发出读/写或其他操作指令，然后返回；硬盘控制器收到指令后指挥硬盘驱动器执行读写等操作，操作完成后就会向CPU发送中断请求，中断处理程序判断是否还有要读写的数据，若有则继续发送操作指令，如此反复。若读写完成，中断处理程序就会调用`end_request()`执行请求结束的操作，唤醒等待该IO请求的进程,释放当前请求项，继续处理下一个请求项(如果有的话)。中断入口在floppy_init()和hd_init()中被设置。
 
 
