@@ -195,6 +195,10 @@ setup的工作主要是通过BIOS中断获取硬件参数放在内存的0x90000~
 * sti
 * move_to_user_mode
 * fork
+* init
+该函数首先调用setup系统调用,对应的处理函数sys_setup()位于hd.c文件。  
+
+
       
 
 
