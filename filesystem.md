@@ -104,7 +104,7 @@ inode中的i_mode字段表示文件的类型，权限等属性：
 			continue;
 		}
         
-* 挂载
+* 挂载过程
     
     int sys_mount(char * dev_name, char * dir_name, int rw_flag)
     {
