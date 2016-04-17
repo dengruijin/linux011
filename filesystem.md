@@ -81,4 +81,4 @@ inode中的i_mode字段表示文件的类型，权限等属性：
  stat.c实现文件属性的获取stat()和fstat()  
  
  ### *挂载机制
- 超级块中的`struct m_inode * s_imount`是该文件系统被挂载到的i节点指针,
+ 超级块中的`struct m_inode * s_imount`是该文件系统被挂载到的i节点指针,i节点的`unsigned char i_mount`是挂载标志(非0说明这是一个挂载点)，
