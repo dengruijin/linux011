@@ -103,3 +103,17 @@ inode中的i_mode字段表示文件的类型，权限等属性：
 			inode = inode_table; // 从i节点表开始处继续找
 			continue;
 		}
+        
+* 挂载
+    
+    int sys_mount(char * dev_name, char * dir_name, int rw_flag)
+    {
+        struct m_inode * dev_i, * dir_i;
+        struct super_block * sb;
+        int dev;
+        /*.....错误排查.....*/
+        sb->s_imount=dir_i;
+        dir_i->i_mount=1;
+        dir_i->i_dirt=1;		/* NOTE! we don't iput(dir_i) */
+        return 0;			/* we do that in umount */
+    }
