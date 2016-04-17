@@ -97,9 +97,9 @@ inode中的i_mode字段表示文件的类型，权限等属性：
 					iput(empty);
 				return inode;
 			}
-			iput(inode);
-			dev = super_block[i].s_dev;
-			nr = ROOT_INO;
+			iput(inode); 
+			dev = super_block[i].s_dev; // 设备号为实际挂载设备
+			nr = ROOT_INO; // 设i节点号为1
 			inode = inode_table;
 			continue;
 		}
