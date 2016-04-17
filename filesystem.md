@@ -114,7 +114,7 @@ inode中的i_mode字段表示文件的类型，权限等属性：
         /*.....错误排查、获取sb和dir_i.....*/
         //dir_i是挂载点的i节点指针
         sb->s_imount=dir_i;
-        dir_i->i_mount=1;
+        dir_i->i_mount=1;   // 设置挂载标志=1
         dir_i->i_dirt=1;		/* NOTE! we don't iput(dir_i) */
         return 0;			/* we do that in umount */
     }
