@@ -87,7 +87,7 @@ inode中的i_mode字段表示文件的类型，权限等属性：
        // inode.c 263
        if (inode->i_mount) {
 			int i;
-
+            // 遍历超级块表看看哪个文件系统挂载在这个i节点上
 			for (i = 0 ; i<NR_SUPER ; i++)
 				if (super_block[i].s_imount==inode)
 					break;
